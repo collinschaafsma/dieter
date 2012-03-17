@@ -56,5 +56,9 @@ module Dieter
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
 
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
+    config.generators.helper      = false
+
   end
 end
