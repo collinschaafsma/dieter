@@ -1,12 +1,24 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <title>Dieter</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Backbone Boilerplate</title>
   <%= csrf_meta_tags %>
+
+  <!-- Application styles -->
+  <link rel="stylesheet" href="/assets/css/index.css">
 </head>
+
 <body>
+  <!-- Main container -->
+  <div role="main" id="main">
+    <%= yield %>
+  </div>
 
-<%= yield %>
-
+  <!-- Application source -->
+  <script data-main="app/config" src="/assets/js/libs/require.js"></script>
 </body>
 </html>
