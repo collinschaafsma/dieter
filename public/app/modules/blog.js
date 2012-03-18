@@ -21,15 +21,15 @@ function(namespace, Backbone) {
     },
 
     index: function() {
-      var main = new Backbone.LayoutManager({
-        template: "main"
+      var blog = new Backbone.LayoutManager({
+        template: "blog"
       });
 
-      main.setViews({
+      blog.setViews({
         "#contents": new Blog.Views.Index()
       });
 
-      main.render(function(el) {
+      blog.render(function(el) {
         $("body").html(el);
       });
     }
