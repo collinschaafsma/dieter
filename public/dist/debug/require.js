@@ -278,7 +278,11 @@ var requirejs, require, define;
 
 this['JST'] = this['JST'] || {};
 
-this['JST']['app/templates/example.html'] = function(data) { return function (obj,_) {
+this['JST']['app/templates/blog/index.html'] = function(data) { return function (obj,_) {
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('This is the blog\n');}return __p.join('');
+}(data, _)};
+
+this['JST']['app/templates/home.html'] = function(data) { return function (obj,_) {
 var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('Hello {{ object }}\n');}return __p.join('');
 }(data, _)};
 
@@ -14112,7 +14116,7 @@ Backbone.LayoutManager.configure({
   // };
 });
 
-define('modules/example',[
+define('modules/blog',[
   "namespace",
 
   // Libs
@@ -14125,43 +14129,40 @@ define('modules/example',[
 
 function(namespace, Backbone) {
 
-  // Create a new module
-  var Example = namespace.module();
+  var Blog = namespace.module();
 
-  // Example extendings
-  Example.Model = Backbone.Model.extend({ /* ... */ });
-  Example.Collection = Backbone.Collection.extend({ /* ... */ });
-  Example.Router = Backbone.Router.extend({ /* ... */ });
+  Blog.Model = Backbone.Model.extend({ /* ... */ });
+  Blog.Collection = Backbone.Collection.extend({ /* ... */ });
+  Blog.Router = Backbone.Router.extend({
+    routes: {
+      "blog": "index"
+    },
 
-  // This will fetch the tutorial template and render it.
-  Example.Views.Index = Backbone.View.extend({
-    template: "example",
+    index: function() {
+      var main = new Backbone.LayoutManager({
+        template: "main"
+      });
+
+      main.setViews({
+        "#contents": new Blog.Views.Index()
+      });
+
+      main.render(function(el) {
+        $("body").html(el);
+      });
+    }
+  });
+
+  Blog.Views.Index = Backbone.View.extend({
+    template: "blog/index",
 
     serialize: function() {
       return { object: "World" };
     }
   });
 
-  // Example.Views.Tutorial = Backbone.View.extend({
-  //   template: "app/templates/example.html",
-
-  //   render: function(done) {
-  //     var view = this;
-
-  //     // Fetch the template, render it to the View element and call done.
-  //     namespace.fetchTemplate(this.template, function(tmpl) {
-  //       view.el.innerHTML = tmpl();
-
-  //       // If a done function is passed, call it with the element
-  //       if (_.isFunction(done)) {
-  //         done(view.el);
-  //       }
-  //     });
-  //   }
-  // });
-
   // Required, return the module for AMD compliance
-  return Example;
+  return Blog;
 
 });
 
@@ -14173,16 +14174,20 @@ require([
   "use!backbone",
 
   // Modules
-  "modules/example"
+  "modules/blog"
 ],
 
-function(namespace, $, Backbone, Example) {
+function(namespace, $, Backbone, Blog) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index",
-      ":hash": "index"
+      "": "index"
+    },
+
+    initialize: function(){
+      // Attaching the blog sub router
+      this.BlogRouter = new Blog.Router();
     },
 
     index: function() {
@@ -14191,7 +14196,8 @@ function(namespace, $, Backbone, Example) {
       });
 
       main.setViews({
-        "#contents": new Example.Views.Index()
+        "#contents": new IndexView()
+
       });
 
       main.render(function(el) {
@@ -14220,6 +14226,14 @@ function(namespace, $, Backbone, Example) {
     //     }
     //   });
     // }
+  });
+
+  IndexView = Backbone.View.extend({
+    template: "home",
+
+    serialize: function() {
+      return { object: "World" };
+    }
   });
 
   // Shorthand the application namespace

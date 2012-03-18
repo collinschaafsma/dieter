@@ -6,16 +6,20 @@ require([
   "use!backbone",
 
   // Modules
-  "modules/example"
+  "modules/blog"
 ],
 
-function(namespace, $, Backbone, Example) {
+function(namespace, $, Backbone, Blog) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
-      "": "index",
-      ":hash": "index"
+      "": "index"
+    },
+
+    initialize: function(){
+      // Attaching the blog sub router
+      this.BlogRouter = new Blog.Router();
     },
 
     index: function() {
@@ -24,7 +28,8 @@ function(namespace, $, Backbone, Example) {
       });
 
       main.setViews({
-        "#contents": new Example.Views.Index()
+        "#contents": new IndexView()
+
       });
 
       main.render(function(el) {
@@ -53,6 +58,14 @@ function(namespace, $, Backbone, Example) {
     //     }
     //   });
     // }
+  });
+
+  IndexView = Backbone.View.extend({
+    template: "home",
+
+    serialize: function() {
+      return { object: "World" };
+    }
   });
 
   // Shorthand the application namespace
