@@ -15,6 +15,7 @@ end
 
 gem 'thin'
 gem 'dalli'
+gem 'friendly_id', "~> 4.0.0.beta8"
 
 
 

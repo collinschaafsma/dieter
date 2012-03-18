@@ -34,6 +34,7 @@ GEM
     dalli (1.1.5)
     erubis (2.7.0)
     eventmachine (0.12.10)
+    friendly_id (4.0.3)
     hike (1.2.1)
     i18n (0.6.0)
     journey (1.0.3)
@@ -92,6 +93,7 @@ PLATFORMS
 
 DEPENDENCIES
   dalli
+  friendly_id (~> 4.0.0.beta8)
   pg
   rails (= 3.2.1)
   sqlite3
