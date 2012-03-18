@@ -1,6 +1,11 @@
 Dieter::Application.routes.draw do
   root :to => 'back_bone#index'
   match 'blog' => 'back_bone#index'
+  namespace :api do
+    namespace :v1 do
+      resources :posts
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
