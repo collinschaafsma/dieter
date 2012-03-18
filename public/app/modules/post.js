@@ -11,11 +11,21 @@ define([
 
 function(namespace, Backbone) {
 
-  var Blog = namespace.module();
+  var Post = namespace.module();
 
-  Blog.Model = Backbone.Model.extend({ /* ... */ });
-  Blog.Collection = Backbone.Collection.extend({ /* ... */ });
-  Blog.Router = Backbone.Router.extend({
+  Post.Model = Backbone.Model.extend({ /* ... */ });
+  Post.Collection = Backbone.Collection.extend({
+    url: '/api/v1/posts',
+
+    model: Post,
+
+    initialize: function() {
+      this.fetch();
+    }
+  });
+
+
+  Post.Router = Backbone.Router.extend({
     routes: {
       "blog": "index"
     },
@@ -26,7 +36,7 @@ function(namespace, Backbone) {
       });
 
       blog.setViews({
-        "#contents": new Blog.Views.Index()
+        "#contents": new Post.Views.Index()
       });
 
       blog.render(function(el) {
@@ -35,8 +45,8 @@ function(namespace, Backbone) {
     }
   });
 
-  Blog.Views.Index = Backbone.View.extend({
-    template: "blog/index",
+  Post.Views.Index = Backbone.View.extend({
+    template: "post/index",
 
     serialize: function() {
       return { object: "World" };
@@ -44,6 +54,6 @@ function(namespace, Backbone) {
   });
 
   // Required, return the module for AMD compliance
-  return Blog;
+  return Post;
 
 });

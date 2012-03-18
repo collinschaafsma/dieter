@@ -278,16 +278,20 @@ var requirejs, require, define;
 
 this['JST'] = this['JST'] || {};
 
-this['JST']['app/templates/blog/index.html'] = function(data) { return function (obj,_) {
-var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('This is the blog\n');}return __p.join('');
+this['JST']['app/templates/home.html'] = function(data) { return function (obj,_) {
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<p>Hello {{ object }}</p>\n<a href="/blog">Blog</a>\n');}return __p.join('');
 }(data, _)};
 
-this['JST']['app/templates/home.html'] = function(data) { return function (obj,_) {
-var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('Hello {{ object }}\n');}return __p.join('');
+this['JST']['app/templates/layouts/blog.html'] = function(data) { return function (obj,_) {
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Blog</h1>\n<div id="contents" class="blog"></div>\n');}return __p.join('');
 }(data, _)};
 
 this['JST']['app/templates/layouts/main.html'] = function(data) { return function (obj,_) {
-var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div id="contents"></div>\n');}return __p.join('');
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<h1>Welcome</h1>\n<div id="contents"></div>\n');}return __p.join('');
+}(data, _)};
+
+this['JST']['app/templates/post/index.html'] = function(data) { return function (obj,_) {
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('This is the blog\n');}return __p.join('');
 }(data, _)};
 
 /*!
@@ -14032,7 +14036,7 @@ function($, _, Backbone, Handlebars) {
   // Put application wide code here
   //
 
-Backbone.LayoutManager.configure({
+  Backbone.LayoutManager.configure({
     paths: {
       layout: "app/templates/layouts/",
       template: "app/templates/"
@@ -14116,7 +14120,7 @@ Backbone.LayoutManager.configure({
   // };
 });
 
-define('modules/blog',[
+define('modules/post',[
   "namespace",
 
   // Libs
@@ -14129,32 +14133,42 @@ define('modules/blog',[
 
 function(namespace, Backbone) {
 
-  var Blog = namespace.module();
+  var Post = namespace.module();
 
-  Blog.Model = Backbone.Model.extend({ /* ... */ });
-  Blog.Collection = Backbone.Collection.extend({ /* ... */ });
-  Blog.Router = Backbone.Router.extend({
+  Post.Model = Backbone.Model.extend({ /* ... */ });
+  Post.Collection = Backbone.Collection.extend({
+    url: '/api/v1/posts',
+
+    model: Post,
+
+    initialize: function() {
+      this.fetch();
+    }
+  });
+
+
+  Post.Router = Backbone.Router.extend({
     routes: {
       "blog": "index"
     },
 
     index: function() {
-      var main = new Backbone.LayoutManager({
-        template: "main"
+      var blog = new Backbone.LayoutManager({
+        template: "blog"
       });
 
-      main.setViews({
-        "#contents": new Blog.Views.Index()
+      blog.setViews({
+        "#contents": new Post.Views.Index()
       });
 
-      main.render(function(el) {
+      blog.render(function(el) {
         $("body").html(el);
       });
     }
   });
 
-  Blog.Views.Index = Backbone.View.extend({
-    template: "blog/index",
+  Post.Views.Index = Backbone.View.extend({
+    template: "post/index",
 
     serialize: function() {
       return { object: "World" };
@@ -14162,7 +14176,7 @@ function(namespace, Backbone) {
   });
 
   // Required, return the module for AMD compliance
-  return Blog;
+  return Post;
 
 });
 
@@ -14174,10 +14188,10 @@ require([
   "use!backbone",
 
   // Modules
-  "modules/blog"
+  "modules/post"
 ],
 
-function(namespace, $, Backbone, Blog) {
+function(namespace, $, Backbone, Post) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -14187,7 +14201,7 @@ function(namespace, $, Backbone, Blog) {
 
     initialize: function(){
       // Attaching the blog sub router
-      this.BlogRouter = new Blog.Router();
+      this.PostRouter = new Post.Router();
     },
 
     index: function() {

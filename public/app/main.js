@@ -6,10 +6,10 @@ require([
   "use!backbone",
 
   // Modules
-  "modules/blog"
+  "modules/post"
 ],
 
-function(namespace, $, Backbone, Blog) {
+function(namespace, $, Backbone, Post) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -19,7 +19,7 @@ function(namespace, $, Backbone, Blog) {
 
     initialize: function(){
       // Attaching the blog sub router
-      this.BlogRouter = new Blog.Router();
+      this.PostRouter = new Post.Router();
     },
 
     index: function() {
