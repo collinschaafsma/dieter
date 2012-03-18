@@ -279,7 +279,11 @@ var requirejs, require, define;
 this['JST'] = this['JST'] || {};
 
 this['JST']['app/templates/example.html'] = function(data) { return function (obj,_) {
-var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<header>\n  <img src="/assets/img/backbone.png">\n  <hr>\n  \n  <div>\n    <h2 class="congrats">Congratulations!</h2>\n    <h2>Seeing this means you have installed Backbone Boilerplate correctly.</h2>\n\n    <p>Now that you have the easiest and most-powerful Backbone boilerplate available,\n    you\'re probably wondering how to use it to start building applications...</p>\n  </div>\n</header>\n\n<section id="toc">\n  <h1>Contents</h1>\n\n  <ul>\n    <li><a data-bypass href="#overview">Overview</a>\n    <li><a data-bypass href="#getting-help">Getting help</a>\n    <li><a data-bypass href="#writing-app">Writing your application</a>\n      <ul class="nested">\n        <li><a data-bypass href="#cleaning">Cleaning out default files and code</a>\n        <ul class="nested">\n          <li><a data-bypass href="#git-history">Removing the Git history</a>\n          <li><a data-bypass href="#test-dir">Removing the test directory</a>\n          <li><a data-bypass href="#build-process">Removing the build process</a>\n          <li><a data-bypass href="#favicon">Changing the Favicon</a>\n          <li><a data-bypass href="#app-code">Removing default application code</a>\n          <li><a data-bypass href="#default-routes">Removing the default routes</a>\n          <li><a data-bypass href="#default-assets">Removing default assets</a>\n        </ul>\n        <li><a data-bypass href="#namespace">Setting your namespace</a>\n        <li><a data-bypass href="#modules">Creating a module</a>\n        <li><a data-bypass href="#templates">Working with templates</a>\n        <li><a data-bypass href="#events">Working with Application Wide Events</a>\n        <li><a data-bypass href="#plugins">Working with libraries and plugins</a>\n      </ul>\n    <li><a data-bypass href="#custom-build">Using the build tool</a>\n      <ul class="nested">\n        <li><a data-bypass href="#running">Running with the defaults</a>\n        <li><a data-bypass href="#customizing">Customizing the build configuration</a>\n        <li><a data-bypass href="#server">Using the development server</a>\n        <li><a data-bypass href="#adding-tasks">Adding new tasks</a>\n      </ul>\n    <li><a data-bypass href="#useful-resources">Useful Resources</a>\n  </ul>\n</section>\n\n<section>\n  <h2 id="overview">Overview</h2>\n\n  <p>Backbone Boilerplate is the product of much research and frustration. While\n  existing boilerplates for Backbone exist, they will often modify the Backbone\n  core, don\'t have an integrated build system, or impose too much on your\n  application\'s structure. This boilerplate attempts to improve that.\n\n  Organize your application in a logical filesystem, and develop Models,\n  Collections, Views, and Routers inside modules. Build your application knowing\n  you have efficient, compact code. Backbone Boilerplate extends on the\n  versatile Backbone core, and helps developers manage their application.</p>\n\n  <h3 id="core-features">Core Features</h3>\n  <ul>\n    <li><a target="_blank" href="https://github.com/h5bp/html5-boilerplate">HTML5 Boilerplate</a> included.\n    <li>Managed filesystem structure for application code, assets, tests, and distribution.\n    <li>Snippets to make common tasks easier: modules, HTML5 History API/Hash navigation, template loading and application events.\n    <li>Flexible and extendable build system.\n      <ul class="nested">\n        <li>Concatenate and minify all your libraries, application code, templates and CSS down to reduce transmission time.\n        <li>Compile underscore templates to prevent pre-processing on the client.\n      </ul>\n  </ul>\n</section>\n\n<section>\n  <h2 id="getting-help">Getting help</h2>\n\n  <p>If you\'re encountering issues, need assistance, or have a question that hasn\'t been answered in this\n  tutorial or <a target="blank" href="https://github.com/tbranyen/backbone-boilerplate">the GitHub project page</a>\n  you may find help in one of these places:</p>\n\n  <ul>\n    <li>IRC - #documentcloud on irc.freenode.net\n    <li><a target="blank" href="http://github.com/tbranyen/backbone-boilerplate/issues">GitHub Issues</a> - Please report if you\'ve found an issue,\n    bug, or controversial request.\n  </ul>\n\n  <p>I want this project to be the best it possibly can and represent the interests of the community, <b>please</b>\n  submit issues with features you find useful and anything that you question.</p>\n</section>\n\n<section>\n  <h2 id="writing-app">Writing your application</h2>\n  <p>Your application may be made up of third-party libraries, plugins, application code, templates, and lots of logic.  All of this will need\n  to be well structured to keep it maintainable and it also needs to be compiled if deployed into production.  Before you can get started you\n  will need to clean out all the existing defaults that are in the boilerplate are necessary to display this tutorial.\n  </p>\n\n  <p class="clues"><b>Strongly recommend you read through this tutorial before cleaning out any files that may hold clues on how to use the Boilerplate.</b></p>\n\n  <h3 id="cleaning">Cleaning out default files and code</h3>\n  <p>There are several places where customization may be required.</p>\n\n  <ul>\n    <li><h4 id="git-history">Removing the Git history</h4>\n      <p>If you cloned the Backbone Boilerplate with Git, you should delete the git directory and then initialize your own Git history:\n\n      <pre><code>\n    $ rm -rf .git\n    $ git init\n      </code></pre>\n      </p>\n\n    <li><h4 id="test-dir">Removing the test directory</h4>\n      <p>If you are not planning on testing your application with QUnit you should delete this directory.</p>\n\n    <li><h4 id="build-process">Removing the build process</h4>\n      <p>If you are not planning on using the provided build tool, delete the <code>build</code> folder.  It contains a lot of unnecessary code and\n      Node.js modules that you will not need.  You should also clear out the commented out script tags inside of <code>index.html</code>:\n      \n      <pre><code>\n    &lt;!--\n         If using the build tool you can uncomment the following lines and use\n         these instead.  They will toggle based on if you are using debug or\n         release.\n    --&gt;\n\n    &lt;!--\n    &lt;script src=&quot;/assets/js/libs.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;/assets/js/templates.js&quot;&gt;&lt;/script&gt;\n    &lt;script src=&quot;/assets/js/app.js&quot;&gt;&lt;/script&gt;\n    --&gt;\n      </code></pre>\n      </p>\n\n    <li><h4 id="favicon">Changing the Favicon</h4>\n      <p>At the root level of the project simply change the <code>favicon.ico</code> file to point to your own branded icon.</p>\n\n    <li><h4 id="app-code">Removing default application code</h4>\n      <p>This tutorial is rendered in the <code>app/modules/example.js</code> file and written in <code>app/templates/example.html</code>.\n      Both of these files are safe to remove.</p>\n\n    <li><h4 id="default-routes">Removing the default routes</h4>\n      <p>Routes are defined in the <code>app/index.js</code> file.  Familiarize yourself with it\'s contents.  You\'ll notice the default router has two existing routes and callback defined, reset it to:\n\n      <pre><code>\n    // Defining the application router, you can attach sub routers here.\n    var Router = Backbone.Router.extend({\n      routes: {\n        "": "index",\n      },\n\n      index: function() {\n        // Put your homepage route logic here\n      }\n    });\n      </code></pre>\n      </p>\n\n\n      <p>Above the Router definition you\'ll see a reference to the example module,\n      this is safe to delete as well.\n\n      <pre><code>\n    // Include the example module\n    var Example = namespace.module("example");\n      </code></pre>\n      </p>\n  \n    <li><h4 id="default-assets">Removing default assets</h4>\n      <p>The default styles for this tutorial are stored in <code>assets/css/style.css</code>.  You will probably want to remove these since they only make sense for this specific page.  They start on <code>Line 209</code>.  With the following H5BP header:\n\n      <pre><code>\n    /* ==|== primary styles =====================================================\n       Author: Backbone Boilerplate <Change to your Name>\n       ========================================================================== */\n     </code></pre>\n     </p>\n\n     <p>You may also want to change the name to yours, if you\'re planning on putting your custom CSS here as well.</p>\n\n     <p>You should delete the <code>assets/img/backbone.png</code> file if you are not planning on using it in your app.</p>\n  </ul>\n\n  <h3 id="namespace">Setting your namespace</h3>\n  <p>This is a very important starting step to creating your application.  This brands the application to your name and makes\n  it something identifiable to new developers.  To set your own namespace, simply open the <code>app/namespace.js</code> file and\n  make the following modifications:\n\n    First change the name of the namespace, this is defined on <code>Line 4</code>\n    <pre><code>\n  this.myapp = {\n    // Assist with code organization, by breaking up logical components of code\n    // into modules.\n    module: function() {\n    </code></pre>\n    </p>\n\n    <p>Once you\'ve set the name, you\'ll want to change the reference in <code>index.js</code> on <code>Line 7</code> to:\n    \n    <pre><code>\n  // Shorthand the application namespace\n  var app = this.myapp;\n    </code></pre>\n    </p>\n  </p>\n\n  <h3 id="modules">Creating a module</h3>\n  <p>Following the Bocoup post on <a data-bypass target="_blank" href="http://weblog.bocoup.com/organizing-your-backbone-js-application-with-modules">Organizing Your Backbone.js Application With Modules</a> this boilerplate provides the same module definition structure.\n\n  Modules are placed in the <code>app/modules/</code> directory.  There is an example module\n  there named: <code>example.js</code>.  The actual module definition function is located\n  inside the <code>app/index.js</code> file.  You create and reference modules with the same\n  function call:  <code>namespace.module(&quot;&lt;module_name&gt;&quot;)</code>.\n\n  Typically a module contains a single Model/Collection/Router and many Views.\n  Therefore the returned module object is empty except for a Views object\n  property that can be used to attach many Views to, like:\n\n  <pre><code>\n  MyModule.Views.Detailed = Backbone.View.extend({ /* ... */ });\n\n  MyModule.Views.Main = Backbone.View.extend({ /* ... */ });\n  </code></pre>\n  </p>\n\n  <p>\n  Attaching Models/Collections/Routers happen on the same level of the module,\n  like so:\n\n  <pre><code>\n  MyModule.Model = Backbone.Model.extend({ /* ... */ });\n\n  MyModule.Router = Backbone.Router.extend({ /* ... */ });\n  </code></pre>\n  </p>\n\n  <h3 id="templates">Working with templates</h3>\n  <p>Templates are a super useful way to separate concerns in your application.  Instead of generating markup from inside your JavaScript\n  application, you instead create it in a separate file and load it into your application.  There are numerous ways of loading in a\n  template, but this boilerplate has chosen the most performant way to build all your templates into a single file.</p>\n\n  <p>This tutorial itself is a template that exists in <code>app/templates/example.html</code>.  You can edit this file and hit refresh\n  in here to see the changes.  The boilerplate comes with a built in function to handle the loading of templates.  It\'s called:\n  \n  <pre><code>\n  namespace.fetchTemplate("app/templates/name.html", function(template) {\n    // Template here is a function, that accepts an object.  Identical to _.template.\n    console.log(template({ ... }));\n  });\n  </code></pre>\n  </p>\n\n  <p>By defining a custom function this will ensure that if you use the build tool or AJAX, that your templates will load consistently.\n  You can see it in action inside the <code>app/modules/example.js</code> module.</p>\n\n  <p>If you use the build process to compile your templates, it will automatically find all the HTML files inside the templates\n  directory and compile them into a templates.js file.  These are actual JavaScript template functions being compiled on the server, which\n  is different from Jammit and most other server-side builders that just invoke functions on page load.</p>\n\n  <p>You can access a compiled template like so:\n\n  <pre><code>\n  var template = window.JST["app/modules/example.html"];\n  template({ ... });\n  </code></pre>\n  </p>\n\n  <h3 id="events">Working with Application Wide Events</h3>\n  <p>Application wide events provide a convenient way for modules to communicate with each other. <code>namespace.app</code> references a copy of the Backbone.Events object. <a href="http://documentcloud.github.com/backbone/#Events">More information on Backbone Events</a></p>\n\n  <p>\n  To bind a callback function to an event:\n\n  <pre><code>\n  //binding an annonymous function to the event "all" with a context of <code>this</code>.\n  namespace.app.on("all", function(){...}, this);\n  </code></pre>\n  </p>\n\n  <p>\n  To remove a callback function (or many) from an event:\n\n  <pre><code>\n  // Removes just the doSomething callback.\n  namespace.app.off("change", doSomething);\n  \n  // Removes all "change" events.\n  namespace.app.off("change");\n  \n  // Removes all events from the namespace.app object. \n  namespace.app.off(); \n  </code></pre>\n  </p>\n\n  <p>\n  To trigger the "change" event:\n\n  <pre><code>\n  namespace.app.trigger("change", [*args]);\n  </code></pre>\n  </p>\n\n  <h3 id="plugins">Working with libraries and plugins</h3>\n  <p>Libraries and plugins are easily added to the application, by placing them inside the <code>assets/js/libs/</code> directory.\n  If you have many plugins in your application, it may make sense to create a separate folder such as <code>assets/js/plugins/</code> \n  for them.</p>\n</section>\n\n<section>\n  <h2 id="custom-build">Using the build tool</h2>\n  <p>The Backbone Boilerplate build process is a state-of-the-art task driven\n  Node.js application that utilizes @cowboy\'s grunt project.\n\n  To run the defaults, execute the following command from the project root,\n  and *not from inside the build folder*.</p>\n\n  <h3 id="running">Running with the defaults</h3>\n  <p>To run the defaults, execute the following command from the project root,\n  and *not from inside the build folder*.\n\n  <pre><code>\n  node build\n  </code></pre>\n  </p>\n\n  <p>\n  This will do a number of things for you.  First it will concatenate all your\n  libs, app code, and templates into separate files inside the `dist/debug`\n  folder.  It will then minify those files and your CSS into production ready\n  files inside the <code>dist/release</code> folder.</p>\n\n  <h3 id="customizing">Customizing the build configuration</h3>\n  <p>To customize and configure the build tool, open `build/config.js` and tweak\nthe settings.</p>\n\n  <h3 id="server">Using the development server</h3>\n  <p>\n  While writing an application that leverages <code>pushState</code> you can run the\n  following command to run a server that will always resolve to the <code>index.html</code>\n\n  <pre><code>\n  node build/server\n  </code></pre>\n  </p>\n\n  <p>\n  This will spawn up an HTTP server on port <code>8000</code>.  This server is intended\n  for development and not production.  You should use url rewriting or forwarding\n  all requests in your production server to achieve this same effect.</p>\n\n  <h4>Serving the built assets</h4>\n\n  <p>If you are using the build tool in conjunction with this development server\n  you can optionally update the <code>index.html</code> file to remove the existing script\n  tags and uncomment out the scripts tag at the bottom to load the <code>dist/debug</code>\n  or <code>dist/release</code> assets.  You can achieve this by specifying either <b>debug</b>\n  or <b>release</b> after the server command, like so:\n\n  <pre><code>\n  node build/server release\n  </code></pre>\n  </p>\n\n  <h3 id="adding-tasks">Adding new tasks</h3>\n  <p>To add a new task into the build system, you simply copy and paste the task JavaScript folder/file into the <code>build/tasks</code> folder\n  or extract the task archive into the same directory.  At the very least in order to run this task, you\'ll need to add it to the <code>build/config.js</code>\n  file.  The last line should look something like:\n\n  <pre><code>\n  task.registerTask("default", "clean lint:files concat jst min mincss new_module_here");\n  </code></pre>\n  </p>\n\n  It\'s possible the custom task will have additional setup instructions, so make\n  sure you read the README for any task.</p>\n</section>\n\n<section id="useful-resources">\n  <h2>Useful resources</h2>\n\n  <ul>\n    <li><a href="http://backbonejs.org/">Backbone documentation</a> - Framework on which Backbone Boilerplate is built.\n    <li><a href="http://documentcloud.github.com/underscore/docs/underscore.html">Underscore documentation</a> - Required dependency for Backbone.\n  </ul>\n</section>\n');}return __p.join('');
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('Hello {{ object }}\n');}return __p.join('');
+}(data, _)};
+
+this['JST']['app/templates/layouts/main.html'] = function(data) { return function (obj,_) {
+var __p=[],print=function(){__p.push.apply(__p,arguments);};with(obj||{}){__p.push('<div id="contents"></div>\n');}return __p.join('');
 }(data, _)};
 
 /*!
@@ -11951,52 +11955,2108 @@ define("backbone", function(){});
 
 define('use!backbone', ['use!underscore','jquery'],function() {return window['Backbone'];});
 
+/*!
+ * backbone.layoutmanager.js v0.2.1
+ * Copyright 2012, Tim Branyen (@tbranyen)
+ * backbone.layoutmanager.js may be freely distributed under the MIT license.
+ */
+(function(window) {
+
+
+
+// Alias the libraries from the global object
+var Backbone = window.Backbone;
+var _ = window._;
+var $ = window.$;
+
+// Accept either a single view or an array of views to clean of all DOM events
+// internal model and collection references and all Backbone.Events.
+function cleanViews(views) {
+  // Clear out all existing views
+  _.each(_.isArray(views) ? views : [views], function(view) {
+    // Ensure the Element is scrubbed of all jQuery events and data
+    view.remove();
+    // Remove all custom events attached to this View
+    view.unbind();
+
+    // Ensure all nested views are cleaned as well
+    if (view.views) {
+      _.each(view.views, function(view) {
+        cleanViews(view);
+      });
+    }
+
+    // If a custom cleanup method was provided on the view, call it after
+    // the initial cleanup is done
+    if (_.isFunction(view.cleanup)) {
+      view.cleanup.call(view);
+    }
+  });
+}
+
+// This gets passed to all _render methods.
+function viewRender(root) {
+  var url, contents, handler;
+  var options = root._options();
+
+  // Once the template is successfully fetched, use its contents to
+  // proceed.  Context argument is first, since it is bound for
+  // partial application reasons.
+  function done(context, contents) {
+    // Ensure the cache is up-to-date.
+    LayoutManager.cache(url, contents);
+
+    // Render the View into the el property.
+    if (contents) {
+      options.html(root.el, options.render(contents, context));
+    }
+
+    // Resolve partials with the View element.
+    handler.resolveWith(root, [root.el]);
+  }
+
+  return {
+    // Shorthand to root.view function with append flag
+    insert: function(partial, view) {
+      if (view) {
+        return root.view(partial, view, true);
+      }
+
+      return root.view("", partial, true);
+    },
+
+    render: function(context) {
+      var template = root.template || options.template;
+
+      if (root.serialize) {
+        options.serialize = root.serialize;
+      }
+
+      // Seek out serialize method and use that object.
+      if (!context && _.isFunction(options.serialize)) {
+        context = options.serialize.call(root);
+      // If serialize is an object, just use that
+      } else if (!context && _.isObject(options.serialize)) {
+        context = options.serialize;
+      }
+
+      // Create an asynchronous handler
+      handler = LayoutManager.makeAsync(options, _.bind(done, root, context));
+
+      // Set the url to the prefix + the view's template property.
+      if (_.isString(template)) {
+        url = root._prefix + template;
+      }
+
+      // Check if contents are already cached
+      if (contents = LayoutManager.cache(url)) {
+        done(context, contents, url);
+
+        return handler;
+      }
+
+      // Fetch layout and template contents
+      if (_.isString(template)) {
+        contents = options.fetch.call(handler, root._prefix + template);
+      // If its not a string just pass the object/function/whatever
+      } else if (template != null) {
+        contents = options.fetch.call(handler, template);
+      }
+
+      // If the function was synchronous, continue execution.
+      if (!handler._isAsync) {
+        done(context, contents);
+      }
+
+      return handler;
+    }
+  };
+}
+
+var LayoutManager = Backbone.View.extend({
+  // Internal state object used to store whether or not a View has been
+  // taken over by layout manager and if it has been rendered into the DOM.
+  __manager__: {},
+
+  // This is a named function to improve logging and debugging within browser
+  // dev tools.  Typically you do not use "anonymous" named functions since IE
+  // has a well known bug, BUT I think we all know the reason why I'm ignoring
+  // that here.
+  constructor: function LayoutManager(options) {
+    var proto = Backbone.LayoutManager.prototype;
+    // Extend the options with the prototype and passed options
+    options = _.extend({}, proto.options, options);
+
+    // Apply the default render scheme.
+    this._render = function(manage) {
+      return manage(this).render();
+    };
+
+    // Set up top level views object
+    this.views = {};
+
+    // If the user provided their own render override, use that instead of the
+    // default.
+    if (this.render !== proto.render) {
+      this._render = this.render;
+      this.render = proto.render;
+    }
+    
+    // Set the prefix for a layout
+    if (options.paths) {
+      this._prefix = options.paths.layout || "";
+    }
+
+    // Set the internal views
+    if (options.views) {
+      this.setViews(options.views);
+    }
+
+    // Ensure the template is mapped over
+    if (this.template) {
+      options.template = this.template;
+    }
+
+    Backbone.View.call(this, options);
+  },
+
+  // Allows the setting of multiple views instead of a single view.
+  setViews: function(views) {
+    // Iterate over all the views and use the View's view method to assign.
+    _.each(views, function(view, name) {
+      // If the view is an array put all views into insert mode
+      if (_.isArray(view)) {
+        _.each(view, function(view) {
+          this.view(name, view, true);
+        }, this);
+
+      // Assign each view using the view function
+      } else {
+        this.view(name, view);
+      }
+    }, this);
+  },
+
+  // This takes in a partial name and view instance and assigns them to
+  // the internal collection of views.  If a view is not a LayoutManager
+  // instance, then mix in the LayoutManager prototype.  This ensures
+  // all Views can be used successfully.
+  //
+  // Must definitely wrap any render method passed in or defaults to a
+  // typical render function `return layout(this).render()`.
+  view: function(name, view, append) {
+    var partials, options;
+    var root = this;
+
+    // Make sure any existing views are completely scrubbed of
+    // events/properties.  Do not run clean on append items.
+    if (this.views[name] && !append) {
+      cleanViews(this.views[name]);
+    }
+
+    // If this view has not been managed yet, ensure its set up to work with
+    // LayoutManager correctly (proper variables and functions).
+    if (!view.__manager__) {
+      // Internal property necessary for every View.
+      view.__manager__ = {};
+
+      // Add in all missing LayoutManager properties and methods.
+      if (!(view instanceof LayoutManager)) {
+        view._render = view.render;
+
+        // If no render override was specified assign the default
+        if (view.render === Backbone.View.prototype.render) {
+          view._render = function(layout) {
+            return layout(this).render();
+          };
+        }
+
+        if (view.views) {
+          view.options.views = view.views;
+        }
+
+        // Mix in reusable properties
+        _.extend(view, {
+          views: {},
+          view: LayoutManager.prototype.view,
+          setViews: LayoutManager.prototype.setViews,
+          _options: LayoutManager.prototype._options
+        });
+      }
+
+      if (!append) {
+        view.__manager__.isManaged = true;
+      }
+
+      view.render = function(done) {
+        var viewDeferred = options.deferred();
+        
+        // When a view has been resolved, ensure that it is correctly updated
+        // and that any done callbacks are triggered.
+        function viewResolve(el) {
+          // Only refresh the view if its not a list item, otherwise it would
+          // cause duplicates.
+          if (!append) {
+            // Ensure no events are not lost when re-applying the partial
+            // method
+            options.detach(view.el);
+            options.partial(root.el, name, view.el);
+          }
+
+          // Only call the done function if a callback was provided.
+          if (_.isFunction(done)) {
+            done.call(view, view.el);
+          }
+        }
+
+        // Break this callback out so that its not duplicated inside the 
+        // following safety try/catch.
+        function renderCallback() {
+          if (!view.__manager__.hasRendered) {
+            options.partial(root.el, name, view.el, append);
+
+            // Ensure DOM events are properly bound
+            view.delegateEvents();
+
+            view.__manager__.hasRendered = true;
+          }
+
+          viewDeferred.resolveWith(view, [view.el]).then(viewResolve);
+        }
+
+        if (!view.__manager__.isManaged) {
+          return viewDeferred.resolve(view.el).then(viewResolve);
+        }
+
+        // In some browsers the stack gets too hairy, so I need to clear it
+        // and setTimeout is unfortunately the best way to do this.
+        try {
+          LayoutManager.prototype.render.call(view, renderCallback);
+        } catch(ex) {
+          // Such an obnoxious hack necessary to keep the browser from crashing.
+          window.setTimeout(function() {
+            LayoutManager.prototype.render.call(view, renderCallback);
+          }, 0);
+        }
+
+        return viewDeferred.promise();
+      };
+
+      // Instance overrides take precedence, fallback to prototype options.
+      options = view._options();
+
+      // Set the prefix for a layout
+      if (!view._prefix && options.paths) {
+        view._prefix = options.paths.template || "";
+      }
+
+      // Set the internal views
+      if (options.views) {
+        view.setViews(options.views);
+      }
+
+    }
+
+    // Special logic for appending items
+    if (append) {
+      partials = this.views[name] = this.views[name] || [];
+      partials.push(view);
+
+      return view;
+    }
+
+    return this.views[name] = view;
+  },
+
+  // By default this should find all nested views and render them into
+  // the this.el and call done once all of them have successfully been
+  // resolved.
+  //
+  // This function returns a promise that can be chained to determine
+  // once all subviews and main view have been rendered into the view.el.
+  render: function(done) {
+    var root = this;
+    var options = this._options();
+    var viewDeferred = options.deferred();
+
+    // Wait until this View has rendered before dealing with nested Views.
+    this._render(viewRender).then(function() {
+      // Ensure element is removed from DOM before updating
+      if (!root.__manager__.hasRendered) {
+        options.detach(root.el);
+      }
+      
+      // Create a list of promises to wait on until rendering is done. Since
+      // this method will run on all children as well, its sufficient for a
+      // full hierarchical. 
+      var promises = _.map(root.views, function(view) {
+        var def;
+
+        // Ensure views are rendered in sequence
+        function seqRender(views, done) {
+          // Once all views have been rendered invoke the sequence render
+          // callback
+          if (!views.length) {
+            return done();
+          }
+
+          // Get each view in order, grab the first one off the stack
+          var view = views.shift();
+
+          // Call render on the view, and once complete call the next view
+          view.__manager__.isManaged = true;
+          view.render(function() {
+            // Invoke the recursive sequence render function with the remaining
+            // views
+            seqRender(views, done);
+          });
+        }
+
+        // If rendering a list out, ensure they happen in a serial order
+        if (_.isArray(view)) {
+          def = options.deferred();
+
+          seqRender(_.clone(view), function() {
+            def.resolve();
+          });
+
+          return def.promise();
+        }
+
+        view.__manager__.isManaged = true;
+        return view.render();
+      });
+
+      // Once all subViews have been rendered, resolve this View's deferred.
+      options.when(promises).then(function() {
+        viewDeferred.resolveWith(root, [root.el]);
+      });
+    });
+
+    // Return a promise that resolves once all immediate subViews have
+    // rendered.
+    return viewDeferred.then(function() {
+      // Ensure DOM events are properly bound
+      root.delegateEvents();
+
+      // Only call the done function if a callback was provided.
+      if (_.isFunction(done)) {
+        done.call(root, root.el);
+      }
+    }).promise();
+  },
+
+  _options: function() {
+    // Instance overrides take precedence, fallback to prototype options.
+    return _.extend({}, LayoutManager.prototype.options, this.options);
+  }
+
+},
+{
+  // Clearable cache
+  _cache: {},
+
+  // Cache templates into LayoutManager._cache
+  cache: function(path, contents) {
+    // If template path is found in the cache, return the contents.
+    if (path in this._cache) {
+      return this._cache[path];
+    // Ensure path and contents aren't undefined
+    } else if (path != null && contents != null) {
+      return this._cache[path] = contents;
+    }
+
+    // If template is not in the cache, return undefined.
+  },
+
+  // This static method allows for global configuration of LayoutManager.
+  configure: function(opts) { 
+    if (_.isObject(opts)) {
+      _.extend(LayoutManager.prototype.options, opts);
+    }
+  },
+
+  makeAsync: function(options, done) {
+    var handler = options.deferred();
+
+    // Used to handle asynchronous renders
+    handler.async = function() {
+      handler._isAsync = true;
+
+      return done;
+    };
+
+    return handler;
+  }
+});
+
+
+// Attach to Backbone
+Backbone.LayoutManager = LayoutManager;
+Backbone.LayoutManager.View = Backbone.View;
+
+// Default configuration options; designed to be overriden.
+LayoutManager.prototype.options = {
+
+  // Layout and template properties can be assigned here to prefix
+  // template/layout names.
+  paths: {},
+
+  // Can be used to supply a different deferred that implements Promises/A.
+  deferred: function() {
+    return $.Deferred();
+  },
+
+  // Fetch is passed a path and is expected to return template contents as a
+  // function or string.
+  fetch: function(path) {
+    return _.template($(path).html());
+  },
+
+  // This is really the only way you will want to partially apply a view into
+  // a layout.  Its entirely possible you'll want to do it differently, so
+  // this method is available to change.
+  partial: function(root, name, el, append) {
+    // If no selector is specified, assume the parent should be added to.
+    var $root = name ? $(root).find(name) : $(root);
+
+    // Use the append method if append argument is true.
+    this[append ? "append" : "html"]($root, el);
+  },
+
+  // Override this with a custom HTML method, passed a root element and an
+  // element to replace the innerHTML with.
+  html: function(root, el) {
+    $(root).html(el);
+  },
+
+  // Very similar to HTML except this one will appendChild.
+  append: function(root, el) {
+    $(root).append(el);
+  },
+
+  // Abstract out the $.fn.detach method
+  detach: function(el) {
+    $(el).detach();
+  },
+
+  // Return a deferred for when all promises resolve/reject.
+  when: function(promises) {
+    return $.when.apply(null, promises);
+  },
+
+  // By default, render using underscore's templating.
+  render: function(template, context) {
+    return template(context);
+  }
+
+};
+
+})(this);
+
+define("plugins/backbone.layoutmanager", function(){});
+
+define('use!plugins/backbone.layoutmanager', ['use!backbone'],function() {return window['undefined'];});
+
+// lib/handlebars/base.js
+var Handlebars = {};
+
+Handlebars.VERSION = "1.0.beta.6";
+
+Handlebars.helpers  = {};
+Handlebars.partials = {};
+
+Handlebars.registerHelper = function(name, fn, inverse) {
+  if(inverse) { fn.not = inverse; }
+  this.helpers[name] = fn;
+};
+
+Handlebars.registerPartial = function(name, str) {
+  this.partials[name] = str;
+};
+
+Handlebars.registerHelper('helperMissing', function(arg) {
+  if(arguments.length === 2) {
+    return undefined;
+  } else {
+    throw new Error("Could not find property '" + arg + "'");
+  }
+});
+
+var toString = Object.prototype.toString, functionType = "[object Function]";
+
+Handlebars.registerHelper('blockHelperMissing', function(context, options) {
+  var inverse = options.inverse || function() {}, fn = options.fn;
+
+
+  var ret = "";
+  var type = toString.call(context);
+
+  if(type === functionType) { context = context.call(this); }
+
+  if(context === true) {
+    return fn(this);
+  } else if(context === false || context == null) {
+    return inverse(this);
+  } else if(type === "[object Array]") {
+    if(context.length > 0) {
+      for(var i=0, j=context.length; i<j; i++) {
+        ret = ret + fn(context[i]);
+      }
+    } else {
+      ret = inverse(this);
+    }
+    return ret;
+  } else {
+    return fn(context);
+  }
+});
+
+Handlebars.registerHelper('each', function(context, options) {
+  var fn = options.fn, inverse = options.inverse;
+  var ret = "";
+
+  if(context && context.length > 0) {
+    for(var i=0, j=context.length; i<j; i++) {
+      ret = ret + fn(context[i]);
+    }
+  } else {
+    ret = inverse(this);
+  }
+  return ret;
+});
+
+Handlebars.registerHelper('if', function(context, options) {
+  var type = toString.call(context);
+  if(type === functionType) { context = context.call(this); }
+
+  if(!context || Handlebars.Utils.isEmpty(context)) {
+    return options.inverse(this);
+  } else {
+    return options.fn(this);
+  }
+});
+
+Handlebars.registerHelper('unless', function(context, options) {
+  var fn = options.fn, inverse = options.inverse;
+  options.fn = inverse;
+  options.inverse = fn;
+
+  return Handlebars.helpers['if'].call(this, context, options);
+});
+
+Handlebars.registerHelper('with', function(context, options) {
+  return options.fn(context);
+});
+
+Handlebars.registerHelper('log', function(context) {
+  Handlebars.log(context);
+});
+;
+// lib/handlebars/compiler/parser.js
+/* Jison generated parser */
+var handlebars = (function(){
+
+var parser = {trace: function trace() { },
+yy: {},
+symbols_: {"error":2,"root":3,"program":4,"EOF":5,"statements":6,"simpleInverse":7,"statement":8,"openInverse":9,"closeBlock":10,"openBlock":11,"mustache":12,"partial":13,"CONTENT":14,"COMMENT":15,"OPEN_BLOCK":16,"inMustache":17,"CLOSE":18,"OPEN_INVERSE":19,"OPEN_ENDBLOCK":20,"path":21,"OPEN":22,"OPEN_UNESCAPED":23,"OPEN_PARTIAL":24,"params":25,"hash":26,"param":27,"STRING":28,"INTEGER":29,"BOOLEAN":30,"hashSegments":31,"hashSegment":32,"ID":33,"EQUALS":34,"pathSegments":35,"SEP":36,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",14:"CONTENT",15:"COMMENT",16:"OPEN_BLOCK",18:"CLOSE",19:"OPEN_INVERSE",20:"OPEN_ENDBLOCK",22:"OPEN",23:"OPEN_UNESCAPED",24:"OPEN_PARTIAL",28:"STRING",29:"INTEGER",30:"BOOLEAN",33:"ID",34:"EQUALS",36:"SEP"},
+productions_: [0,[3,2],[4,3],[4,1],[4,0],[6,1],[6,2],[8,3],[8,3],[8,1],[8,1],[8,1],[8,1],[11,3],[9,3],[10,3],[12,3],[12,3],[13,3],[13,4],[7,2],[17,3],[17,2],[17,2],[17,1],[25,2],[25,1],[27,1],[27,1],[27,1],[27,1],[26,1],[31,2],[31,1],[32,3],[32,3],[32,3],[32,3],[21,1],[35,3],[35,1]],
+performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
+
+var $0 = $$.length - 1;
+switch (yystate) {
+case 1: return $$[$0-1] 
+break;
+case 2: this.$ = new yy.ProgramNode($$[$0-2], $$[$0]) 
+break;
+case 3: this.$ = new yy.ProgramNode($$[$0]) 
+break;
+case 4: this.$ = new yy.ProgramNode([]) 
+break;
+case 5: this.$ = [$$[$0]] 
+break;
+case 6: $$[$0-1].push($$[$0]); this.$ = $$[$0-1] 
+break;
+case 7: this.$ = new yy.InverseNode($$[$0-2], $$[$0-1], $$[$0]) 
+break;
+case 8: this.$ = new yy.BlockNode($$[$0-2], $$[$0-1], $$[$0]) 
+break;
+case 9: this.$ = $$[$0] 
+break;
+case 10: this.$ = $$[$0] 
+break;
+case 11: this.$ = new yy.ContentNode($$[$0]) 
+break;
+case 12: this.$ = new yy.CommentNode($$[$0]) 
+break;
+case 13: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+break;
+case 14: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+break;
+case 15: this.$ = $$[$0-1] 
+break;
+case 16: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1]) 
+break;
+case 17: this.$ = new yy.MustacheNode($$[$0-1][0], $$[$0-1][1], true) 
+break;
+case 18: this.$ = new yy.PartialNode($$[$0-1]) 
+break;
+case 19: this.$ = new yy.PartialNode($$[$0-2], $$[$0-1]) 
+break;
+case 20: 
+break;
+case 21: this.$ = [[$$[$0-2]].concat($$[$0-1]), $$[$0]] 
+break;
+case 22: this.$ = [[$$[$0-1]].concat($$[$0]), null] 
+break;
+case 23: this.$ = [[$$[$0-1]], $$[$0]] 
+break;
+case 24: this.$ = [[$$[$0]], null] 
+break;
+case 25: $$[$0-1].push($$[$0]); this.$ = $$[$0-1]; 
+break;
+case 26: this.$ = [$$[$0]] 
+break;
+case 27: this.$ = $$[$0] 
+break;
+case 28: this.$ = new yy.StringNode($$[$0]) 
+break;
+case 29: this.$ = new yy.IntegerNode($$[$0]) 
+break;
+case 30: this.$ = new yy.BooleanNode($$[$0]) 
+break;
+case 31: this.$ = new yy.HashNode($$[$0]) 
+break;
+case 32: $$[$0-1].push($$[$0]); this.$ = $$[$0-1] 
+break;
+case 33: this.$ = [$$[$0]] 
+break;
+case 34: this.$ = [$$[$0-2], $$[$0]] 
+break;
+case 35: this.$ = [$$[$0-2], new yy.StringNode($$[$0])] 
+break;
+case 36: this.$ = [$$[$0-2], new yy.IntegerNode($$[$0])] 
+break;
+case 37: this.$ = [$$[$0-2], new yy.BooleanNode($$[$0])] 
+break;
+case 38: this.$ = new yy.IdNode($$[$0]) 
+break;
+case 39: $$[$0-2].push($$[$0]); this.$ = $$[$0-2]; 
+break;
+case 40: this.$ = [$$[$0]] 
+break;
+}
+},
+table: [{3:1,4:2,5:[2,4],6:3,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],22:[1,13],23:[1,14],24:[1,15]},{1:[3]},{5:[1,16]},{5:[2,3],7:17,8:18,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,19],20:[2,3],22:[1,13],23:[1,14],24:[1,15]},{5:[2,5],14:[2,5],15:[2,5],16:[2,5],19:[2,5],20:[2,5],22:[2,5],23:[2,5],24:[2,5]},{4:20,6:3,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,4],22:[1,13],23:[1,14],24:[1,15]},{4:21,6:3,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,4],22:[1,13],23:[1,14],24:[1,15]},{5:[2,9],14:[2,9],15:[2,9],16:[2,9],19:[2,9],20:[2,9],22:[2,9],23:[2,9],24:[2,9]},{5:[2,10],14:[2,10],15:[2,10],16:[2,10],19:[2,10],20:[2,10],22:[2,10],23:[2,10],24:[2,10]},{5:[2,11],14:[2,11],15:[2,11],16:[2,11],19:[2,11],20:[2,11],22:[2,11],23:[2,11],24:[2,11]},{5:[2,12],14:[2,12],15:[2,12],16:[2,12],19:[2,12],20:[2,12],22:[2,12],23:[2,12],24:[2,12]},{17:22,21:23,33:[1,25],35:24},{17:26,21:23,33:[1,25],35:24},{17:27,21:23,33:[1,25],35:24},{17:28,21:23,33:[1,25],35:24},{21:29,33:[1,25],35:24},{1:[2,1]},{6:30,8:4,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],22:[1,13],23:[1,14],24:[1,15]},{5:[2,6],14:[2,6],15:[2,6],16:[2,6],19:[2,6],20:[2,6],22:[2,6],23:[2,6],24:[2,6]},{17:22,18:[1,31],21:23,33:[1,25],35:24},{10:32,20:[1,33]},{10:34,20:[1,33]},{18:[1,35]},{18:[2,24],21:40,25:36,26:37,27:38,28:[1,41],29:[1,42],30:[1,43],31:39,32:44,33:[1,45],35:24},{18:[2,38],28:[2,38],29:[2,38],30:[2,38],33:[2,38],36:[1,46]},{18:[2,40],28:[2,40],29:[2,40],30:[2,40],33:[2,40],36:[2,40]},{18:[1,47]},{18:[1,48]},{18:[1,49]},{18:[1,50],21:51,33:[1,25],35:24},{5:[2,2],8:18,9:5,11:6,12:7,13:8,14:[1,9],15:[1,10],16:[1,12],19:[1,11],20:[2,2],22:[1,13],23:[1,14],24:[1,15]},{14:[2,20],15:[2,20],16:[2,20],19:[2,20],22:[2,20],23:[2,20],24:[2,20]},{5:[2,7],14:[2,7],15:[2,7],16:[2,7],19:[2,7],20:[2,7],22:[2,7],23:[2,7],24:[2,7]},{21:52,33:[1,25],35:24},{5:[2,8],14:[2,8],15:[2,8],16:[2,8],19:[2,8],20:[2,8],22:[2,8],23:[2,8],24:[2,8]},{14:[2,14],15:[2,14],16:[2,14],19:[2,14],20:[2,14],22:[2,14],23:[2,14],24:[2,14]},{18:[2,22],21:40,26:53,27:54,28:[1,41],29:[1,42],30:[1,43],31:39,32:44,33:[1,45],35:24},{18:[2,23]},{18:[2,26],28:[2,26],29:[2,26],30:[2,26],33:[2,26]},{18:[2,31],32:55,33:[1,56]},{18:[2,27],28:[2,27],29:[2,27],30:[2,27],33:[2,27]},{18:[2,28],28:[2,28],29:[2,28],30:[2,28],33:[2,28]},{18:[2,29],28:[2,29],29:[2,29],30:[2,29],33:[2,29]},{18:[2,30],28:[2,30],29:[2,30],30:[2,30],33:[2,30]},{18:[2,33],33:[2,33]},{18:[2,40],28:[2,40],29:[2,40],30:[2,40],33:[2,40],34:[1,57],36:[2,40]},{33:[1,58]},{14:[2,13],15:[2,13],16:[2,13],19:[2,13],20:[2,13],22:[2,13],23:[2,13],24:[2,13]},{5:[2,16],14:[2,16],15:[2,16],16:[2,16],19:[2,16],20:[2,16],22:[2,16],23:[2,16],24:[2,16]},{5:[2,17],14:[2,17],15:[2,17],16:[2,17],19:[2,17],20:[2,17],22:[2,17],23:[2,17],24:[2,17]},{5:[2,18],14:[2,18],15:[2,18],16:[2,18],19:[2,18],20:[2,18],22:[2,18],23:[2,18],24:[2,18]},{18:[1,59]},{18:[1,60]},{18:[2,21]},{18:[2,25],28:[2,25],29:[2,25],30:[2,25],33:[2,25]},{18:[2,32],33:[2,32]},{34:[1,57]},{21:61,28:[1,62],29:[1,63],30:[1,64],33:[1,25],35:24},{18:[2,39],28:[2,39],29:[2,39],30:[2,39],33:[2,39],36:[2,39]},{5:[2,19],14:[2,19],15:[2,19],16:[2,19],19:[2,19],20:[2,19],22:[2,19],23:[2,19],24:[2,19]},{5:[2,15],14:[2,15],15:[2,15],16:[2,15],19:[2,15],20:[2,15],22:[2,15],23:[2,15],24:[2,15]},{18:[2,34],33:[2,34]},{18:[2,35],33:[2,35]},{18:[2,36],33:[2,36]},{18:[2,37],33:[2,37]}],
+defaultActions: {16:[2,1],37:[2,23],53:[2,21]},
+parseError: function parseError(str, hash) {
+    throw new Error(str);
+},
+parse: function parse(input) {
+    var self = this, stack = [0], vstack = [null], lstack = [], table = this.table, yytext = "", yylineno = 0, yyleng = 0, recovering = 0, TERROR = 2, EOF = 1;
+    this.lexer.setInput(input);
+    this.lexer.yy = this.yy;
+    this.yy.lexer = this.lexer;
+    if (typeof this.lexer.yylloc == "undefined")
+        this.lexer.yylloc = {};
+    var yyloc = this.lexer.yylloc;
+    lstack.push(yyloc);
+    if (typeof this.yy.parseError === "function")
+        this.parseError = this.yy.parseError;
+    function popStack(n) {
+        stack.length = stack.length - 2 * n;
+        vstack.length = vstack.length - n;
+        lstack.length = lstack.length - n;
+    }
+    function lex() {
+        var token;
+        token = self.lexer.lex() || 1;
+        if (typeof token !== "number") {
+            token = self.symbols_[token] || token;
+        }
+        return token;
+    }
+    var symbol, preErrorSymbol, state, action, a, r, yyval = {}, p, len, newState, expected;
+    while (true) {
+        state = stack[stack.length - 1];
+        if (this.defaultActions[state]) {
+            action = this.defaultActions[state];
+        } else {
+            if (symbol == null)
+                symbol = lex();
+            action = table[state] && table[state][symbol];
+        }
+        if (typeof action === "undefined" || !action.length || !action[0]) {
+            if (!recovering) {
+                expected = [];
+                for (p in table[state])
+                    if (this.terminals_[p] && p > 2) {
+                        expected.push("'" + this.terminals_[p] + "'");
+                    }
+                var errStr = "";
+                if (this.lexer.showPosition) {
+                    errStr = "Parse error on line " + (yylineno + 1) + ":\n" + this.lexer.showPosition() + "\nExpecting " + expected.join(", ") + ", got '" + this.terminals_[symbol] + "'";
+                } else {
+                    errStr = "Parse error on line " + (yylineno + 1) + ": Unexpected " + (symbol == 1?"end of input":"'" + (this.terminals_[symbol] || symbol) + "'");
+                }
+                this.parseError(errStr, {text: this.lexer.match, token: this.terminals_[symbol] || symbol, line: this.lexer.yylineno, loc: yyloc, expected: expected});
+            }
+        }
+        if (action[0] instanceof Array && action.length > 1) {
+            throw new Error("Parse Error: multiple actions possible at state: " + state + ", token: " + symbol);
+        }
+        switch (action[0]) {
+        case 1:
+            stack.push(symbol);
+            vstack.push(this.lexer.yytext);
+            lstack.push(this.lexer.yylloc);
+            stack.push(action[1]);
+            symbol = null;
+            if (!preErrorSymbol) {
+                yyleng = this.lexer.yyleng;
+                yytext = this.lexer.yytext;
+                yylineno = this.lexer.yylineno;
+                yyloc = this.lexer.yylloc;
+                if (recovering > 0)
+                    recovering--;
+            } else {
+                symbol = preErrorSymbol;
+                preErrorSymbol = null;
+            }
+            break;
+        case 2:
+            len = this.productions_[action[1]][1];
+            yyval.$ = vstack[vstack.length - len];
+            yyval._$ = {first_line: lstack[lstack.length - (len || 1)].first_line, last_line: lstack[lstack.length - 1].last_line, first_column: lstack[lstack.length - (len || 1)].first_column, last_column: lstack[lstack.length - 1].last_column};
+            r = this.performAction.call(yyval, yytext, yyleng, yylineno, this.yy, action[1], vstack, lstack);
+            if (typeof r !== "undefined") {
+                return r;
+            }
+            if (len) {
+                stack = stack.slice(0, -1 * len * 2);
+                vstack = vstack.slice(0, -1 * len);
+                lstack = lstack.slice(0, -1 * len);
+            }
+            stack.push(this.productions_[action[1]][0]);
+            vstack.push(yyval.$);
+            lstack.push(yyval._$);
+            newState = table[stack[stack.length - 2]][stack[stack.length - 1]];
+            stack.push(newState);
+            break;
+        case 3:
+            return true;
+        }
+    }
+    return true;
+}
+};/* Jison generated lexer */
+var lexer = (function(){
+
+var lexer = ({EOF:1,
+parseError:function parseError(str, hash) {
+        if (this.yy.parseError) {
+            this.yy.parseError(str, hash);
+        } else {
+            throw new Error(str);
+        }
+    },
+setInput:function (input) {
+        this._input = input;
+        this._more = this._less = this.done = false;
+        this.yylineno = this.yyleng = 0;
+        this.yytext = this.matched = this.match = '';
+        this.conditionStack = ['INITIAL'];
+        this.yylloc = {first_line:1,first_column:0,last_line:1,last_column:0};
+        return this;
+    },
+input:function () {
+        var ch = this._input[0];
+        this.yytext+=ch;
+        this.yyleng++;
+        this.match+=ch;
+        this.matched+=ch;
+        var lines = ch.match(/\n/);
+        if (lines) this.yylineno++;
+        this._input = this._input.slice(1);
+        return ch;
+    },
+unput:function (ch) {
+        this._input = ch + this._input;
+        return this;
+    },
+more:function () {
+        this._more = true;
+        return this;
+    },
+pastInput:function () {
+        var past = this.matched.substr(0, this.matched.length - this.match.length);
+        return (past.length > 20 ? '...':'') + past.substr(-20).replace(/\n/g, "");
+    },
+upcomingInput:function () {
+        var next = this.match;
+        if (next.length < 20) {
+            next += this._input.substr(0, 20-next.length);
+        }
+        return (next.substr(0,20)+(next.length > 20 ? '...':'')).replace(/\n/g, "");
+    },
+showPosition:function () {
+        var pre = this.pastInput();
+        var c = new Array(pre.length + 1).join("-");
+        return pre + this.upcomingInput() + "\n" + c+"^";
+    },
+next:function () {
+        if (this.done) {
+            return this.EOF;
+        }
+        if (!this._input) this.done = true;
+
+        var token,
+            match,
+            col,
+            lines;
+        if (!this._more) {
+            this.yytext = '';
+            this.match = '';
+        }
+        var rules = this._currentRules();
+        for (var i=0;i < rules.length; i++) {
+            match = this._input.match(this.rules[rules[i]]);
+            if (match) {
+                lines = match[0].match(/\n.*/g);
+                if (lines) this.yylineno += lines.length;
+                this.yylloc = {first_line: this.yylloc.last_line,
+                               last_line: this.yylineno+1,
+                               first_column: this.yylloc.last_column,
+                               last_column: lines ? lines[lines.length-1].length-1 : this.yylloc.last_column + match[0].length}
+                this.yytext += match[0];
+                this.match += match[0];
+                this.matches = match;
+                this.yyleng = this.yytext.length;
+                this._more = false;
+                this._input = this._input.slice(match[0].length);
+                this.matched += match[0];
+                token = this.performAction.call(this, this.yy, this, rules[i],this.conditionStack[this.conditionStack.length-1]);
+                if (token) return token;
+                else return;
+            }
+        }
+        if (this._input === "") {
+            return this.EOF;
+        } else {
+            this.parseError('Lexical error on line '+(this.yylineno+1)+'. Unrecognized text.\n'+this.showPosition(), 
+                    {text: "", token: null, line: this.yylineno});
+        }
+    },
+lex:function lex() {
+        var r = this.next();
+        if (typeof r !== 'undefined') {
+            return r;
+        } else {
+            return this.lex();
+        }
+    },
+begin:function begin(condition) {
+        this.conditionStack.push(condition);
+    },
+popState:function popState() {
+        return this.conditionStack.pop();
+    },
+_currentRules:function _currentRules() {
+        return this.conditions[this.conditionStack[this.conditionStack.length-1]].rules;
+    },
+topState:function () {
+        return this.conditionStack[this.conditionStack.length-2];
+    },
+pushState:function begin(condition) {
+        this.begin(condition);
+    }});
+lexer.performAction = function anonymous(yy,yy_,$avoiding_name_collisions,YY_START) {
+
+var YYSTATE=YY_START
+switch($avoiding_name_collisions) {
+case 0:
+                                   if(yy_.yytext.slice(-1) !== "\\") this.begin("mu");
+                                   if(yy_.yytext.slice(-1) === "\\") yy_.yytext = yy_.yytext.substr(0,yy_.yyleng-1), this.begin("emu");
+                                   if(yy_.yytext) return 14;
+                                 
+break;
+case 1: return 14; 
+break;
+case 2: this.popState(); return 14; 
+break;
+case 3: return 24; 
+break;
+case 4: return 16; 
+break;
+case 5: return 20; 
+break;
+case 6: return 19; 
+break;
+case 7: return 19; 
+break;
+case 8: return 23; 
+break;
+case 9: return 23; 
+break;
+case 10: yy_.yytext = yy_.yytext.substr(3,yy_.yyleng-5); this.popState(); return 15; 
+break;
+case 11: return 22; 
+break;
+case 12: return 34; 
+break;
+case 13: return 33; 
+break;
+case 14: return 33; 
+break;
+case 15: return 36; 
+break;
+case 16: /*ignore whitespace*/ 
+break;
+case 17: this.popState(); return 18; 
+break;
+case 18: this.popState(); return 18; 
+break;
+case 19: yy_.yytext = yy_.yytext.substr(1,yy_.yyleng-2).replace(/\\"/g,'"'); return 28; 
+break;
+case 20: return 30; 
+break;
+case 21: return 30; 
+break;
+case 22: return 29; 
+break;
+case 23: return 33; 
+break;
+case 24: yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 33; 
+break;
+case 25: return 'INVALID'; 
+break;
+case 26: return 5; 
+break;
+}
+};
+lexer.rules = [/^[^\x00]*?(?=(\{\{))/,/^[^\x00]+/,/^[^\x00]{2,}?(?=(\{\{))/,/^\{\{>/,/^\{\{#/,/^\{\{\//,/^\{\{\^/,/^\{\{\s*else\b/,/^\{\{\{/,/^\{\{&/,/^\{\{![\s\S]*?\}\}/,/^\{\{/,/^=/,/^\.(?=[} ])/,/^\.\./,/^[\/.]/,/^\s+/,/^\}\}\}/,/^\}\}/,/^"(\\["]|[^"])*"/,/^true(?=[}\s])/,/^false(?=[}\s])/,/^[0-9]+(?=[}\s])/,/^[a-zA-Z0-9_$-]+(?=[=}\s\/.])/,/^\[[^\]]*\]/,/^./,/^$/];
+lexer.conditions = {"mu":{"rules":[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26],"inclusive":false},"emu":{"rules":[2],"inclusive":false},"INITIAL":{"rules":[0,1,26],"inclusive":true}};return lexer;})()
+parser.lexer = lexer;
+return parser;
+})();
+if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
+exports.parser = handlebars;
+exports.parse = function () { return handlebars.parse.apply(handlebars, arguments); }
+exports.main = function commonjsMain(args) {
+    if (!args[1])
+        throw new Error('Usage: '+args[0]+' FILE');
+    if (typeof process !== 'undefined') {
+        var source = require('fs').readFileSync(require('path').join(process.cwd(), args[1]), "utf8");
+    } else {
+        var cwd = require("file").path(require("file").cwd());
+        var source = cwd.join(args[1]).read({charset: "utf-8"});
+    }
+    return exports.parser.parse(source);
+}
+if (typeof module !== 'undefined' && require.main === module) {
+  exports.main(typeof process !== 'undefined' ? process.argv.slice(1) : require("system").args);
+}
+};
+;
+// lib/handlebars/compiler/base.js
+Handlebars.Parser = handlebars;
+
+Handlebars.parse = function(string) {
+  Handlebars.Parser.yy = Handlebars.AST;
+  return Handlebars.Parser.parse(string);
+};
+
+Handlebars.print = function(ast) {
+  return new Handlebars.PrintVisitor().accept(ast);
+};
+
+Handlebars.logger = {
+  DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, level: 3,
+
+  // override in the host environment
+  log: function(level, str) {}
+};
+
+Handlebars.log = function(level, str) { Handlebars.logger.log(level, str); };
+;
+// lib/handlebars/compiler/ast.js
+(function() {
+
+  Handlebars.AST = {};
+
+  Handlebars.AST.ProgramNode = function(statements, inverse) {
+    this.type = "program";
+    this.statements = statements;
+    if(inverse) { this.inverse = new Handlebars.AST.ProgramNode(inverse); }
+  };
+
+  Handlebars.AST.MustacheNode = function(params, hash, unescaped) {
+    this.type = "mustache";
+    this.id = params[0];
+    this.params = params.slice(1);
+    this.hash = hash;
+    this.escaped = !unescaped;
+  };
+
+  Handlebars.AST.PartialNode = function(id, context) {
+    this.type    = "partial";
+
+    // TODO: disallow complex IDs
+
+    this.id      = id;
+    this.context = context;
+  };
+
+  var verifyMatch = function(open, close) {
+    if(open.original !== close.original) {
+      throw new Handlebars.Exception(open.original + " doesn't match " + close.original);
+    }
+  };
+
+  Handlebars.AST.BlockNode = function(mustache, program, close) {
+    verifyMatch(mustache.id, close);
+    this.type = "block";
+    this.mustache = mustache;
+    this.program  = program;
+  };
+
+  Handlebars.AST.InverseNode = function(mustache, program, close) {
+    verifyMatch(mustache.id, close);
+    this.type = "inverse";
+    this.mustache = mustache;
+    this.program  = program;
+  };
+
+  Handlebars.AST.ContentNode = function(string) {
+    this.type = "content";
+    this.string = string;
+  };
+
+  Handlebars.AST.HashNode = function(pairs) {
+    this.type = "hash";
+    this.pairs = pairs;
+  };
+
+  Handlebars.AST.IdNode = function(parts) {
+    this.type = "ID";
+    this.original = parts.join(".");
+
+    var dig = [], depth = 0;
+
+    for(var i=0,l=parts.length; i<l; i++) {
+      var part = parts[i];
+
+      if(part === "..") { depth++; }
+      else if(part === "." || part === "this") { this.isScoped = true; }
+      else { dig.push(part); }
+    }
+
+    this.parts    = dig;
+    this.string   = dig.join('.');
+    this.depth    = depth;
+    this.isSimple = (dig.length === 1) && (depth === 0);
+  };
+
+  Handlebars.AST.StringNode = function(string) {
+    this.type = "STRING";
+    this.string = string;
+  };
+
+  Handlebars.AST.IntegerNode = function(integer) {
+    this.type = "INTEGER";
+    this.integer = integer;
+  };
+
+  Handlebars.AST.BooleanNode = function(bool) {
+    this.type = "BOOLEAN";
+    this.bool = bool;
+  };
+
+  Handlebars.AST.CommentNode = function(comment) {
+    this.type = "comment";
+    this.comment = comment;
+  };
+
+})();;
+// lib/handlebars/utils.js
+Handlebars.Exception = function(message) {
+  var tmp = Error.prototype.constructor.apply(this, arguments);
+
+  for (var p in tmp) {
+    if (tmp.hasOwnProperty(p)) { this[p] = tmp[p]; }
+  }
+
+  this.message = tmp.message;
+};
+Handlebars.Exception.prototype = new Error;
+
+// Build out our basic SafeString type
+Handlebars.SafeString = function(string) {
+  this.string = string;
+};
+Handlebars.SafeString.prototype.toString = function() {
+  return this.string.toString();
+};
+
+(function() {
+  var escape = {
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#x27;",
+    "`": "&#x60;"
+  };
+
+  var badChars = /&(?!\w+;)|[<>"'`]/g;
+  var possible = /[&<>"'`]/;
+
+  var escapeChar = function(chr) {
+    return escape[chr] || "&amp;";
+  };
+
+  Handlebars.Utils = {
+    escapeExpression: function(string) {
+      // don't escape SafeStrings, since they're already safe
+      if (string instanceof Handlebars.SafeString) {
+        return string.toString();
+      } else if (string == null || string === false) {
+        return "";
+      }
+
+      if(!possible.test(string)) { return string; }
+      return string.replace(badChars, escapeChar);
+    },
+
+    isEmpty: function(value) {
+      if (typeof value === "undefined") {
+        return true;
+      } else if (value === null) {
+        return true;
+      } else if (value === false) {
+        return true;
+      } else if(Object.prototype.toString.call(value) === "[object Array]" && value.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+})();;
+// lib/handlebars/compiler/compiler.js
+Handlebars.Compiler = function() {};
+Handlebars.JavaScriptCompiler = function() {};
+
+(function(Compiler, JavaScriptCompiler) {
+  Compiler.OPCODE_MAP = {
+    appendContent: 1,
+    getContext: 2,
+    lookupWithHelpers: 3,
+    lookup: 4,
+    append: 5,
+    invokeMustache: 6,
+    appendEscaped: 7,
+    pushString: 8,
+    truthyOrFallback: 9,
+    functionOrFallback: 10,
+    invokeProgram: 11,
+    invokePartial: 12,
+    push: 13,
+    assignToHash: 15,
+    pushStringParam: 16
+  };
+
+  Compiler.MULTI_PARAM_OPCODES = {
+    appendContent: 1,
+    getContext: 1,
+    lookupWithHelpers: 2,
+    lookup: 1,
+    invokeMustache: 3,
+    pushString: 1,
+    truthyOrFallback: 1,
+    functionOrFallback: 1,
+    invokeProgram: 3,
+    invokePartial: 1,
+    push: 1,
+    assignToHash: 1,
+    pushStringParam: 1
+  };
+
+  Compiler.DISASSEMBLE_MAP = {};
+
+  for(var prop in Compiler.OPCODE_MAP) {
+    var value = Compiler.OPCODE_MAP[prop];
+    Compiler.DISASSEMBLE_MAP[value] = prop;
+  }
+
+  Compiler.multiParamSize = function(code) {
+    return Compiler.MULTI_PARAM_OPCODES[Compiler.DISASSEMBLE_MAP[code]];
+  };
+
+  Compiler.prototype = {
+    compiler: Compiler,
+
+    disassemble: function() {
+      var opcodes = this.opcodes, opcode, nextCode;
+      var out = [], str, name, value;
+
+      for(var i=0, l=opcodes.length; i<l; i++) {
+        opcode = opcodes[i];
+
+        if(opcode === 'DECLARE') {
+          name = opcodes[++i];
+          value = opcodes[++i];
+          out.push("DECLARE " + name + " = " + value);
+        } else {
+          str = Compiler.DISASSEMBLE_MAP[opcode];
+
+          var extraParams = Compiler.multiParamSize(opcode);
+          var codes = [];
+
+          for(var j=0; j<extraParams; j++) {
+            nextCode = opcodes[++i];
+
+            if(typeof nextCode === "string") {
+              nextCode = "\"" + nextCode.replace("\n", "\\n") + "\"";
+            }
+
+            codes.push(nextCode);
+          }
+
+          str = str + " " + codes.join(" ");
+
+          out.push(str);
+        }
+      }
+
+      return out.join("\n");
+    },
+
+    guid: 0,
+
+    compile: function(program, options) {
+      this.children = [];
+      this.depths = {list: []};
+      this.options = options;
+
+      // These changes will propagate to the other compiler components
+      var knownHelpers = this.options.knownHelpers;
+      this.options.knownHelpers = {
+        'helperMissing': true,
+        'blockHelperMissing': true,
+        'each': true,
+        'if': true,
+        'unless': true,
+        'with': true,
+        'log': true
+      };
+      if (knownHelpers) {
+        for (var name in knownHelpers) {
+          this.options.knownHelpers[name] = knownHelpers[name];
+        }
+      }
+
+      return this.program(program);
+    },
+
+    accept: function(node) {
+      return this[node.type](node);
+    },
+
+    program: function(program) {
+      var statements = program.statements, statement;
+      this.opcodes = [];
+
+      for(var i=0, l=statements.length; i<l; i++) {
+        statement = statements[i];
+        this[statement.type](statement);
+      }
+      this.isSimple = l === 1;
+
+      this.depths.list = this.depths.list.sort(function(a, b) {
+        return a - b;
+      });
+
+      return this;
+    },
+
+    compileProgram: function(program) {
+      var result = new this.compiler().compile(program, this.options);
+      var guid = this.guid++;
+
+      this.usePartial = this.usePartial || result.usePartial;
+
+      this.children[guid] = result;
+
+      for(var i=0, l=result.depths.list.length; i<l; i++) {
+        depth = result.depths.list[i];
+
+        if(depth < 2) { continue; }
+        else { this.addDepth(depth - 1); }
+      }
+
+      return guid;
+    },
+
+    block: function(block) {
+      var mustache = block.mustache;
+      var depth, child, inverse, inverseGuid;
+
+      var params = this.setupStackForMustache(mustache);
+
+      var programGuid = this.compileProgram(block.program);
+
+      if(block.program.inverse) {
+        inverseGuid = this.compileProgram(block.program.inverse);
+        this.declare('inverse', inverseGuid);
+      }
+
+      this.opcode('invokeProgram', programGuid, params.length, !!mustache.hash);
+      this.declare('inverse', null);
+      this.opcode('append');
+    },
+
+    inverse: function(block) {
+      var params = this.setupStackForMustache(block.mustache);
+
+      var programGuid = this.compileProgram(block.program);
+
+      this.declare('inverse', programGuid);
+
+      this.opcode('invokeProgram', null, params.length, !!block.mustache.hash);
+      this.declare('inverse', null);
+      this.opcode('append');
+    },
+
+    hash: function(hash) {
+      var pairs = hash.pairs, pair, val;
+
+      this.opcode('push', '{}');
+
+      for(var i=0, l=pairs.length; i<l; i++) {
+        pair = pairs[i];
+        val  = pair[1];
+
+        this.accept(val);
+        this.opcode('assignToHash', pair[0]);
+      }
+    },
+
+    partial: function(partial) {
+      var id = partial.id;
+      this.usePartial = true;
+
+      if(partial.context) {
+        this.ID(partial.context);
+      } else {
+        this.opcode('push', 'depth0');
+      }
+
+      this.opcode('invokePartial', id.original);
+      this.opcode('append');
+    },
+
+    content: function(content) {
+      this.opcode('appendContent', content.string);
+    },
+
+    mustache: function(mustache) {
+      var params = this.setupStackForMustache(mustache);
+
+      this.opcode('invokeMustache', params.length, mustache.id.original, !!mustache.hash);
+
+      if(mustache.escaped && !this.options.noEscape) {
+        this.opcode('appendEscaped');
+      } else {
+        this.opcode('append');
+      }
+    },
+
+    ID: function(id) {
+      this.addDepth(id.depth);
+
+      this.opcode('getContext', id.depth);
+
+      this.opcode('lookupWithHelpers', id.parts[0] || null, id.isScoped || false);
+
+      for(var i=1, l=id.parts.length; i<l; i++) {
+        this.opcode('lookup', id.parts[i]);
+      }
+    },
+
+    STRING: function(string) {
+      this.opcode('pushString', string.string);
+    },
+
+    INTEGER: function(integer) {
+      this.opcode('push', integer.integer);
+    },
+
+    BOOLEAN: function(bool) {
+      this.opcode('push', bool.bool);
+    },
+
+    comment: function() {},
+
+    // HELPERS
+    pushParams: function(params) {
+      var i = params.length, param;
+
+      while(i--) {
+        param = params[i];
+
+        if(this.options.stringParams) {
+          if(param.depth) {
+            this.addDepth(param.depth);
+          }
+
+          this.opcode('getContext', param.depth || 0);
+          this.opcode('pushStringParam', param.string);
+        } else {
+          this[param.type](param);
+        }
+      }
+    },
+
+    opcode: function(name, val1, val2, val3) {
+      this.opcodes.push(Compiler.OPCODE_MAP[name]);
+      if(val1 !== undefined) { this.opcodes.push(val1); }
+      if(val2 !== undefined) { this.opcodes.push(val2); }
+      if(val3 !== undefined) { this.opcodes.push(val3); }
+    },
+
+    declare: function(name, value) {
+      this.opcodes.push('DECLARE');
+      this.opcodes.push(name);
+      this.opcodes.push(value);
+    },
+
+    addDepth: function(depth) {
+      if(depth === 0) { return; }
+
+      if(!this.depths[depth]) {
+        this.depths[depth] = true;
+        this.depths.list.push(depth);
+      }
+    },
+
+    setupStackForMustache: function(mustache) {
+      var params = mustache.params;
+
+      this.pushParams(params);
+
+      if(mustache.hash) {
+        this.hash(mustache.hash);
+      }
+
+      this.ID(mustache.id);
+
+      return params;
+    }
+  };
+
+  JavaScriptCompiler.prototype = {
+    // PUBLIC API: You can override these methods in a subclass to provide
+    // alternative compiled forms for name lookup and buffering semantics
+    nameLookup: function(parent, name, type) {
+			if (/^[0-9]+$/.test(name)) {
+        return parent + "[" + name + "]";
+      } else if (JavaScriptCompiler.isValidJavaScriptVariableName(name)) {
+	    	return parent + "." + name;
+			}
+			else {
+				return parent + "['" + name + "']";
+      }
+    },
+
+    appendToBuffer: function(string) {
+      if (this.environment.isSimple) {
+        return "return " + string + ";";
+      } else {
+        return "buffer += " + string + ";";
+      }
+    },
+
+    initializeBuffer: function() {
+      return this.quotedString("");
+    },
+
+    namespace: "Handlebars",
+    // END PUBLIC API
+
+    compile: function(environment, options, context, asObject) {
+      this.environment = environment;
+      this.options = options || {};
+
+      this.name = this.environment.name;
+      this.isChild = !!context;
+      this.context = context || {
+        programs: [],
+        aliases: { self: 'this' },
+        registers: {list: []}
+      };
+
+      this.preamble();
+
+      this.stackSlot = 0;
+      this.stackVars = [];
+
+      this.compileChildren(environment, options);
+
+      var opcodes = environment.opcodes, opcode;
+
+      this.i = 0;
+
+      for(l=opcodes.length; this.i<l; this.i++) {
+        opcode = this.nextOpcode(0);
+
+        if(opcode[0] === 'DECLARE') {
+          this.i = this.i + 2;
+          this[opcode[1]] = opcode[2];
+        } else {
+          this.i = this.i + opcode[1].length;
+          this[opcode[0]].apply(this, opcode[1]);
+        }
+      }
+
+      return this.createFunctionContext(asObject);
+    },
+
+    nextOpcode: function(n) {
+      var opcodes = this.environment.opcodes, opcode = opcodes[this.i + n], name, val;
+      var extraParams, codes;
+
+      if(opcode === 'DECLARE') {
+        name = opcodes[this.i + 1];
+        val  = opcodes[this.i + 2];
+        return ['DECLARE', name, val];
+      } else {
+        name = Compiler.DISASSEMBLE_MAP[opcode];
+
+        extraParams = Compiler.multiParamSize(opcode);
+        codes = [];
+
+        for(var j=0; j<extraParams; j++) {
+          codes.push(opcodes[this.i + j + 1 + n]);
+        }
+
+        return [name, codes];
+      }
+    },
+
+    eat: function(opcode) {
+      this.i = this.i + opcode.length;
+    },
+
+    preamble: function() {
+      var out = [];
+
+      // this register will disambiguate helper lookup from finding a function in
+      // a context. This is necessary for mustache compatibility, which requires
+      // that context functions in blocks are evaluated by blockHelperMissing, and
+      // then proceed as if the resulting value was provided to blockHelperMissing.
+      this.useRegister('foundHelper');
+
+      if (!this.isChild) {
+        var namespace = this.namespace;
+        var copies = "helpers = helpers || " + namespace + ".helpers;";
+        if(this.environment.usePartial) { copies = copies + " partials = partials || " + namespace + ".partials;"; }
+        out.push(copies);
+      } else {
+        out.push('');
+      }
+
+      if (!this.environment.isSimple) {
+        out.push(", buffer = " + this.initializeBuffer());
+      } else {
+        out.push("");
+      }
+
+      // track the last context pushed into place to allow skipping the
+      // getContext opcode when it would be a noop
+      this.lastContext = 0;
+      this.source = out;
+    },
+
+    createFunctionContext: function(asObject) {
+      var locals = this.stackVars;
+      if (!this.isChild) {
+        locals = locals.concat(this.context.registers.list);
+      }
+
+      if(locals.length > 0) {
+        this.source[1] = this.source[1] + ", " + locals.join(", ");
+      }
+
+      // Generate minimizer alias mappings
+      if (!this.isChild) {
+        var aliases = []
+        for (var alias in this.context.aliases) {
+          this.source[1] = this.source[1] + ', ' + alias + '=' + this.context.aliases[alias];
+        }
+      }
+
+      if (this.source[1]) {
+        this.source[1] = "var " + this.source[1].substring(2) + ";";
+      }
+
+      // Merge children
+      if (!this.isChild) {
+        this.source[1] += '\n' + this.context.programs.join('\n') + '\n';
+      }
+
+      if (!this.environment.isSimple) {
+        this.source.push("return buffer;");
+      }
+
+      var params = this.isChild ? ["depth0", "data"] : ["Handlebars", "depth0", "helpers", "partials", "data"];
+
+      for(var i=0, l=this.environment.depths.list.length; i<l; i++) {
+        params.push("depth" + this.environment.depths.list[i]);
+      }
+
+      if (asObject) {
+        params.push(this.source.join("\n  "));
+
+        return Function.apply(this, params);
+      } else {
+        var functionSource = 'function ' + (this.name || '') + '(' + params.join(',') + ') {\n  ' + this.source.join("\n  ") + '}';
+        Handlebars.log(Handlebars.logger.DEBUG, functionSource + "\n\n");
+        return functionSource;
+      }
+    },
+
+    appendContent: function(content) {
+      this.source.push(this.appendToBuffer(this.quotedString(content)));
+    },
+
+    append: function() {
+      var local = this.popStack();
+      this.source.push("if(" + local + " || " + local + " === 0) { " + this.appendToBuffer(local) + " }");
+      if (this.environment.isSimple) {
+        this.source.push("else { " + this.appendToBuffer("''") + " }");
+      }
+    },
+
+    appendEscaped: function() {
+      var opcode = this.nextOpcode(1), extra = "";
+      this.context.aliases.escapeExpression = 'this.escapeExpression';
+
+      if(opcode[0] === 'appendContent') {
+        extra = " + " + this.quotedString(opcode[1][0]);
+        this.eat(opcode);
+      }
+
+      this.source.push(this.appendToBuffer("escapeExpression(" + this.popStack() + ")" + extra));
+    },
+
+    getContext: function(depth) {
+      if(this.lastContext !== depth) {
+        this.lastContext = depth;
+      }
+    },
+
+    lookupWithHelpers: function(name, isScoped) {
+      if(name) {
+        var topStack = this.nextStack();
+
+        this.usingKnownHelper = false;
+
+        var toPush;
+        if (!isScoped && this.options.knownHelpers[name]) {
+          toPush = topStack + " = " + this.nameLookup('helpers', name, 'helper');
+          this.usingKnownHelper = true;
+        } else if (isScoped || this.options.knownHelpersOnly) {
+          toPush = topStack + " = " + this.nameLookup('depth' + this.lastContext, name, 'context');
+        } else {
+          this.register('foundHelper', this.nameLookup('helpers', name, 'helper'));
+          toPush = topStack + " = foundHelper || " + this.nameLookup('depth' + this.lastContext, name, 'context');
+        }
+
+        toPush += ';';
+        this.source.push(toPush);
+      } else {
+        this.pushStack('depth' + this.lastContext);
+      }
+    },
+
+    lookup: function(name) {
+      var topStack = this.topStack();
+      this.source.push(topStack + " = (" + topStack + " === null || " + topStack + " === undefined || " + topStack + " === false ? " +
+ 				topStack + " : " + this.nameLookup(topStack, name, 'context') + ");");
+    },
+
+    pushStringParam: function(string) {
+      this.pushStack('depth' + this.lastContext);
+      this.pushString(string);
+    },
+
+    pushString: function(string) {
+      this.pushStack(this.quotedString(string));
+    },
+
+    push: function(name) {
+      this.pushStack(name);
+    },
+
+    invokeMustache: function(paramSize, original, hasHash) {
+      this.populateParams(paramSize, this.quotedString(original), "{}", null, hasHash, function(nextStack, helperMissingString, id) {
+        if (!this.usingKnownHelper) {
+          this.context.aliases.helperMissing = 'helpers.helperMissing';
+          this.context.aliases.undef = 'void 0';
+          this.source.push("else if(" + id + "=== undef) { " + nextStack + " = helperMissing.call(" + helperMissingString + "); }");
+          if (nextStack !== id) {
+            this.source.push("else { " + nextStack + " = " + id + "; }");
+          }
+        }
+      });
+    },
+
+    invokeProgram: function(guid, paramSize, hasHash) {
+      var inverse = this.programExpression(this.inverse);
+      var mainProgram = this.programExpression(guid);
+
+      this.populateParams(paramSize, null, mainProgram, inverse, hasHash, function(nextStack, helperMissingString, id) {
+        if (!this.usingKnownHelper) {
+          this.context.aliases.blockHelperMissing = 'helpers.blockHelperMissing';
+          this.source.push("else { " + nextStack + " = blockHelperMissing.call(" + helperMissingString + "); }");
+        }
+      });
+    },
+
+    populateParams: function(paramSize, helperId, program, inverse, hasHash, fn) {
+      var needsRegister = hasHash || this.options.stringParams || inverse || this.options.data;
+      var id = this.popStack(), nextStack;
+      var params = [], param, stringParam, stringOptions;
+
+      if (needsRegister) {
+        this.register('tmp1', program);
+        stringOptions = 'tmp1';
+      } else {
+        stringOptions = '{ hash: {} }';
+      }
+
+      if (needsRegister) {
+        var hash = (hasHash ? this.popStack() : '{}');
+        this.source.push('tmp1.hash = ' + hash + ';');
+      }
+
+      if(this.options.stringParams) {
+        this.source.push('tmp1.contexts = [];');
+      }
+
+      for(var i=0; i<paramSize; i++) {
+        param = this.popStack();
+        params.push(param);
+
+        if(this.options.stringParams) {
+          this.source.push('tmp1.contexts.push(' + this.popStack() + ');');
+        }
+      }
+
+      if(inverse) {
+        this.source.push('tmp1.fn = tmp1;');
+        this.source.push('tmp1.inverse = ' + inverse + ';');
+      }
+
+      if(this.options.data) {
+        this.source.push('tmp1.data = data;');
+      }
+
+      params.push(stringOptions);
+
+      this.populateCall(params, id, helperId || id, fn, program !== '{}');
+    },
+
+    populateCall: function(params, id, helperId, fn, program) {
+      var paramString = ["depth0"].concat(params).join(", ");
+      var helperMissingString = ["depth0"].concat(helperId).concat(params).join(", ");
+
+      var nextStack = this.nextStack();
+
+      if (this.usingKnownHelper) {
+        this.source.push(nextStack + " = " + id + ".call(" + paramString + ");");
+      } else {
+        this.context.aliases.functionType = '"function"';
+        var condition = program ? "foundHelper && " : ""
+        this.source.push("if(" + condition + "typeof " + id + " === functionType) { " + nextStack + " = " + id + ".call(" + paramString + "); }");
+      }
+      fn.call(this, nextStack, helperMissingString, id);
+      this.usingKnownHelper = false;
+    },
+
+    invokePartial: function(context) {
+      params = [this.nameLookup('partials', context, 'partial'), "'" + context + "'", this.popStack(), "helpers", "partials"];
+
+      if (this.options.data) {
+        params.push("data");
+      }
+
+      this.pushStack("self.invokePartial(" + params.join(", ") + ");");
+    },
+
+    assignToHash: function(key) {
+      var value = this.popStack();
+      var hash = this.topStack();
+
+      this.source.push(hash + "['" + key + "'] = " + value + ";");
+    },
+
+    // HELPERS
+
+    compiler: JavaScriptCompiler,
+
+    compileChildren: function(environment, options) {
+      var children = environment.children, child, compiler;
+
+      for(var i=0, l=children.length; i<l; i++) {
+        child = children[i];
+        compiler = new this.compiler();
+
+        this.context.programs.push('');     // Placeholder to prevent name conflicts for nested children
+        var index = this.context.programs.length;
+        child.index = index;
+        child.name = 'program' + index;
+        this.context.programs[index] = compiler.compile(child, options, this.context);
+      }
+    },
+
+    programExpression: function(guid) {
+      if(guid == null) { return "self.noop"; }
+
+      var child = this.environment.children[guid],
+          depths = child.depths.list;
+      var programParams = [child.index, child.name, "data"];
+
+      for(var i=0, l = depths.length; i<l; i++) {
+        depth = depths[i];
+
+        if(depth === 1) { programParams.push("depth0"); }
+        else { programParams.push("depth" + (depth - 1)); }
+      }
+
+      if(depths.length === 0) {
+        return "self.program(" + programParams.join(", ") + ")";
+      } else {
+        programParams.shift();
+        return "self.programWithDepth(" + programParams.join(", ") + ")";
+      }
+    },
+
+    register: function(name, val) {
+      this.useRegister(name);
+      this.source.push(name + " = " + val + ";");
+    },
+
+    useRegister: function(name) {
+      if(!this.context.registers[name]) {
+        this.context.registers[name] = true;
+        this.context.registers.list.push(name);
+      }
+    },
+
+    pushStack: function(item) {
+      this.source.push(this.nextStack() + " = " + item + ";");
+      return "stack" + this.stackSlot;
+    },
+
+    nextStack: function() {
+      this.stackSlot++;
+      if(this.stackSlot > this.stackVars.length) { this.stackVars.push("stack" + this.stackSlot); }
+      return "stack" + this.stackSlot;
+    },
+
+    popStack: function() {
+      return "stack" + this.stackSlot--;
+    },
+
+    topStack: function() {
+      return "stack" + this.stackSlot;
+    },
+
+    quotedString: function(str) {
+      return '"' + str
+        .replace(/\\/g, '\\\\')
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+        .replace(/\r/g, '\\r') + '"';
+    }
+  };
+
+  var reservedWords = (
+    "break else new var" +
+    " case finally return void" +
+    " catch for switch while" +
+    " continue function this with" +
+    " default if throw" +
+    " delete in try" +
+    " do instanceof typeof" +
+    " abstract enum int short" +
+    " boolean export interface static" +
+    " byte extends long super" +
+    " char final native synchronized" +
+    " class float package throws" +
+    " const goto private transient" +
+    " debugger implements protected volatile" +
+    " double import public let yield"
+  ).split(" ");
+
+  var compilerWords = JavaScriptCompiler.RESERVED_WORDS = {};
+
+  for(var i=0, l=reservedWords.length; i<l; i++) {
+    compilerWords[reservedWords[i]] = true;
+  }
+
+	JavaScriptCompiler.isValidJavaScriptVariableName = function(name) {
+		if(!JavaScriptCompiler.RESERVED_WORDS[name] && /^[a-zA-Z_$][0-9a-zA-Z_$]+$/.test(name)) {
+			return true;
+		}
+		return false;
+	}
+
+})(Handlebars.Compiler, Handlebars.JavaScriptCompiler);
+
+Handlebars.precompile = function(string, options) {
+  options = options || {};
+
+  var ast = Handlebars.parse(string);
+  var environment = new Handlebars.Compiler().compile(ast, options);
+  return new Handlebars.JavaScriptCompiler().compile(environment, options);
+};
+
+Handlebars.compile = function(string, options) {
+  options = options || {};
+
+  var compiled;
+  function compile() {
+    var ast = Handlebars.parse(string);
+    var environment = new Handlebars.Compiler().compile(ast, options);
+    var templateSpec = new Handlebars.JavaScriptCompiler().compile(environment, options, undefined, true);
+    return Handlebars.template(templateSpec);
+  }
+
+  // Template is only compiled on first use and cached after that point.
+  return function(context, options) {
+    if (!compiled) {
+      compiled = compile();
+    }
+    return compiled.call(this, context, options);
+  };
+};
+;
+// lib/handlebars/runtime.js
+Handlebars.VM = {
+  template: function(templateSpec) {
+    // Just add water
+    var container = {
+      escapeExpression: Handlebars.Utils.escapeExpression,
+      invokePartial: Handlebars.VM.invokePartial,
+      programs: [],
+      program: function(i, fn, data) {
+        var programWrapper = this.programs[i];
+        if(data) {
+          return Handlebars.VM.program(fn, data);
+        } else if(programWrapper) {
+          return programWrapper;
+        } else {
+          programWrapper = this.programs[i] = Handlebars.VM.program(fn);
+          return programWrapper;
+        }
+      },
+      programWithDepth: Handlebars.VM.programWithDepth,
+      noop: Handlebars.VM.noop
+    };
+
+    return function(context, options) {
+      options = options || {};
+      return templateSpec.call(container, Handlebars, context, options.helpers, options.partials, options.data);
+    };
+  },
+
+  programWithDepth: function(fn, data, $depth) {
+    var args = Array.prototype.slice.call(arguments, 2);
+
+    return function(context, options) {
+      options = options || {};
+
+      return fn.apply(this, [context, options.data || data].concat(args));
+    };
+  },
+  program: function(fn, data) {
+    return function(context, options) {
+      options = options || {};
+
+      return fn(context, options.data || data);
+    };
+  },
+  noop: function() { return ""; },
+  invokePartial: function(partial, name, context, helpers, partials, data) {
+    options = { helpers: helpers, partials: partials, data: data };
+
+    if(partial === undefined) {
+      throw new Handlebars.Exception("The partial " + name + " could not be found");
+    } else if(partial instanceof Function) {
+      return partial(context, options);
+    } else if (!Handlebars.compile) {
+      throw new Handlebars.Exception("The partial " + name + " could not be compiled when running in runtime-only mode");
+    } else {
+      partials[name] = Handlebars.compile(partial);
+      return partials[name](context, options);
+    }
+  }
+};
+
+Handlebars.template = Handlebars.VM.template;
+;
+
+define("handlebars", function(){});
+
+define('use!handlebars', [],function() {return window['Handlebars'];});
+
 define('namespace',[
   // Libs
   "jquery",
   "use!underscore",
-  "use!backbone"
+  "use!backbone",
+  "use!handlebars",
+
+  // Plugins
+  "use!plugins/backbone.layoutmanager"
 ],
 
-function($, _, Backbone) {
+function($, _, Backbone, Handlebars) {
   // Put application wide code here
+  //
 
-  return {
-    // This is useful when developing if you don't want to use a
-    // build process every time you change a template.
-    //
-    // Delete if you are using a different template loading method.
-    fetchTemplate: function(path, done) {
-      var JST = window.JST = window.JST || {};
-      var def = new $.Deferred();
-
-      // Should be an instant synchronous way of getting the template, if it
-      // exists in the JST object.
-      if (JST[path]) {
-        if (_.isFunction(done)) {
-          done(JST[path]);
-        }
-
-        return def.resolve(JST[path]);
-      }
-
-      // Fetch it asynchronously if not available from JST 
-      $.get(path, function(contents) {
-        JST[path] = _.template(contents);
-
-        // Set the global JST cache and return the template
-        if (_.isFunction(done)) {
-          done(JST[path]);
-        }
-
-        // Resolve the template deferred
-        def.resolve(JST[path]);
-      }, "text");
-
-      // Ensure a normalized return value (Promise)
-      return def.promise();
+Backbone.LayoutManager.configure({
+    paths: {
+      layout: "app/templates/layouts/",
+      template: "app/templates/"
     },
 
+    render: function(template, context) {
+      return template(context);
+    },
+
+    fetch: function(path) {
+      path = path + ".html";
+
+      var done = this.async();
+      var JST = window.JST = window.JST || {};
+
+      if (JST[path]) {
+        return done(Handlebars.template(JST[path]));
+      }
+
+      $.get(path, function(contents) {
+        var tmpl = Handlebars.compile(contents);
+
+        done(JST[path] = tmpl);
+      }, "text");
+    }
+  });
+
+  return {
     // Create a custom object with a nested Views object
     module: function(additionalProps) {
       return _.extend({ Views: {} }, additionalProps);
@@ -12005,6 +14065,51 @@ function($, _, Backbone) {
     // Keep active application instances namespaced under an app object.
     app: _.extend({}, Backbone.Events)
   };
+
+  // return {
+  //   // This is useful when developing if you don't want to use a
+  //   // build process every time you change a template.
+  //   //
+  //   // Delete if you are using a different template loading method.
+  //   fetchTemplate: function(path, done) {
+  //     var JST = window.JST = window.JST || {};
+  //     var def = new $.Deferred();
+
+  //     // Should be an instant synchronous way of getting the template, if it
+  //     // exists in the JST object.
+  //     if (JST[path]) {
+  //       if (_.isFunction(done)) {
+  //         done(JST[path]);
+  //       }
+
+  //       return def.resolve(JST[path]);
+  //     }
+
+  //     // Fetch it asynchronously if not available from JST 
+  //     $.get(path, function(contents) {
+  //       JST[path] = _.template(contents);
+
+  //       // Set the global JST cache and return the template
+  //       if (_.isFunction(done)) {
+  //         done(JST[path]);
+  //       }
+
+  //       // Resolve the template deferred
+  //       def.resolve(JST[path]);
+  //     }, "text");
+
+  //     // Ensure a normalized return value (Promise)
+  //     return def.promise();
+  //   },
+
+  //   // Create a custom object with a nested Views object
+  //   module: function(additionalProps) {
+  //     return _.extend({ Views: {} }, additionalProps);
+  //   },
+
+  //   // Keep active application instances namespaced under an app object.
+  //   app: _.extend({}, Backbone.Events)
+  // };
 });
 
 define('modules/example',[
@@ -12029,23 +14134,31 @@ function(namespace, Backbone) {
   Example.Router = Backbone.Router.extend({ /* ... */ });
 
   // This will fetch the tutorial template and render it.
-  Example.Views.Tutorial = Backbone.View.extend({
-    template: "app/templates/example.html",
+  Example.Views.Index = Backbone.View.extend({
+    template: "example",
 
-    render: function(done) {
-      var view = this;
-
-      // Fetch the template, render it to the View element and call done.
-      namespace.fetchTemplate(this.template, function(tmpl) {
-        view.el.innerHTML = tmpl();
-
-        // If a done function is passed, call it with the element
-        if (_.isFunction(done)) {
-          done(view.el);
-        }
-      });
+    serialize: function() {
+      return { object: "World" };
     }
   });
+
+  // Example.Views.Tutorial = Backbone.View.extend({
+  //   template: "app/templates/example.html",
+
+  //   render: function(done) {
+  //     var view = this;
+
+  //     // Fetch the template, render it to the View element and call done.
+  //     namespace.fetchTemplate(this.template, function(tmpl) {
+  //       view.el.innerHTML = tmpl();
+
+  //       // If a done function is passed, call it with the element
+  //       if (_.isFunction(done)) {
+  //         done(view.el);
+  //       }
+  //     });
+  //   }
+  // });
 
   // Required, return the module for AMD compliance
   return Example;
@@ -12072,27 +14185,41 @@ function(namespace, $, Backbone, Example) {
       ":hash": "index"
     },
 
-    index: function(hash) {
-      var route = this;
-      var tutorial = new Example.Views.Tutorial();
+    index: function() {
+      var main = new Backbone.LayoutManager({
+        template: "main"
+      });
 
-      // Attach the tutorial to the DOM
-      tutorial.render(function(el) {
-        $("#main").html(el);
+      main.setViews({
+        "#contents": new Example.Views.Index()
+      });
 
-        // Fix for hashes in pushState and hash fragment
-        if (hash && !route._alreadyTriggered) {
-          // Reset to home, pushState support automatically converts hashes
-          Backbone.history.navigate("", false);
-
-          // Trigger the default browser behavior
-          location.hash = hash;
-
-          // Set an internal flag to stop recursive looping
-          route._alreadyTriggered = true;
-        }
+      main.render(function(el) {
+        $("body").html(el);
       });
     }
+
+    // index: function(hash) {
+    //   var route = this;
+    //   var tutorial = new Example.Views.Tutorial();
+
+    //   // Attach the tutorial to the DOM
+    //   tutorial.render(function(el) {
+    //     $("#main").html(el);
+
+    //     // Fix for hashes in pushState and hash fragment
+    //     if (hash && !route._alreadyTriggered) {
+    //       // Reset to home, pushState support automatically converts hashes
+    //       Backbone.history.navigate("", false);
+
+    //       // Trigger the default browser behavior
+    //       location.hash = hash;
+
+    //       // Set an internal flag to stop recursive looping
+    //       route._alreadyTriggered = true;
+    //     }
+    //   });
+    // }
   });
 
   // Shorthand the application namespace
@@ -12150,6 +14277,7 @@ require.config({
     jquery: "../assets/js/libs/jquery",
     underscore: "../assets/js/libs/underscore",
     backbone: "../assets/js/libs/backbone",
+    handlebars: "../assets/js/libs/handlebars-1.0.0.beta.6",
 
     // Shim Plugin
     use: "../assets/js/plugins/use"
@@ -12163,6 +14291,14 @@ require.config({
 
     underscore: {
       attach: "_"
+    },
+
+    handlebars: {
+      attach: "Handlebars"
+    },
+
+    "plugins/backbone.layoutmanager": {
+      deps: ["use!backbone"]
     }
   }
 });

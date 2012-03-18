@@ -18,27 +18,41 @@ function(namespace, $, Backbone, Example) {
       ":hash": "index"
     },
 
-    index: function(hash) {
-      var route = this;
-      var tutorial = new Example.Views.Tutorial();
+    index: function() {
+      var main = new Backbone.LayoutManager({
+        template: "main"
+      });
 
-      // Attach the tutorial to the DOM
-      tutorial.render(function(el) {
-        $("#main").html(el);
+      main.setViews({
+        "#contents": new Example.Views.Index()
+      });
 
-        // Fix for hashes in pushState and hash fragment
-        if (hash && !route._alreadyTriggered) {
-          // Reset to home, pushState support automatically converts hashes
-          Backbone.history.navigate("", false);
-
-          // Trigger the default browser behavior
-          location.hash = hash;
-
-          // Set an internal flag to stop recursive looping
-          route._alreadyTriggered = true;
-        }
+      main.render(function(el) {
+        $("body").html(el);
       });
     }
+
+    // index: function(hash) {
+    //   var route = this;
+    //   var tutorial = new Example.Views.Tutorial();
+
+    //   // Attach the tutorial to the DOM
+    //   tutorial.render(function(el) {
+    //     $("#main").html(el);
+
+    //     // Fix for hashes in pushState and hash fragment
+    //     if (hash && !route._alreadyTriggered) {
+    //       // Reset to home, pushState support automatically converts hashes
+    //       Backbone.history.navigate("", false);
+
+    //       // Trigger the default browser behavior
+    //       location.hash = hash;
+
+    //       // Set an internal flag to stop recursive looping
+    //       route._alreadyTriggered = true;
+    //     }
+    //   });
+    // }
   });
 
   // Shorthand the application namespace
