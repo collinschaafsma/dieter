@@ -6,10 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <title>Backbone Boilerplate</title>
-  <%= csrf_meta_tags %>
 
   <!-- Application styles -->
-
+  <% if Rails.env.production? %>
+    <link rel="stylesheet" href="/dist/release/index.css">
+  <% else %>
+    <link rel="stylesheet" href="/assets/css/index.css">
+  <% end %>
 </head>
 
 <body>
@@ -19,6 +22,10 @@
   </div>
 
   <!-- Application source -->
-
+  <% if Rails.env.production? %>
+    <script data-main="app/config" src="/dist/release/require.js"></script>
+  <% else %>
+    <script data-main="app/config" src="/assets/js/libs/require.js"></script>
+  <% end %>
 </body>
 </html>
